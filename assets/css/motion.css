@@ -1,0 +1,95 @@
+/* ===== Site-wide motion layer (assets/js/motion.js tags the elements) =====
+   .mo      single block: rises and sharpens into place when scrolled into view
+   .mo-h    heading: written in from the right (RTL), like ink
+   .mo-g    group: its children arrive one after another (--i = order)
+   All entrances use `backwards` fill so after they finish the element's own hover/transform rules apply again. */
+:root{--mo-ease:cubic-bezier(.2,.75,.2,1);--mo-step:70ms}
+
+@keyframes moUp{from{opacity:0;transform:translateY(28px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes moPop{from{opacity:0;transform:translateY(22px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes moWipe{from{clip-path:inset(-25% -6% -25% 100%);opacity:.2;transform:translateX(-14px)}to{clip-path:inset(-25% -6% -25% -6%);opacity:1;transform:none}}
+@keyframes moDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes moFade{from{opacity:0}to{opacity:1}}
+@keyframes moSlideIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+
+/* page enter / leave */
+.mo-on body{transition:opacity .12s ease}
+.mo-on .mo-now{animation:none!important;opacity:1!important}
+html.mo-wait body{opacity:0}
+html.mo-leave body{opacity:0;transition:opacity .28s ease}
+
+/* header items drop in */
+/* header stays put from page to page (no drop-in), so moving between pages does not jump (user 08/11) */
+
+/* scroll entrances */
+.mo-on .mo:not(.mo-in),.mo-on .mo-h:not(.mo-in),.mo-on .mo-k:not(.mo-in){opacity:0}
+.mo-on .mo.mo-in{animation:moUp .95s var(--mo-ease) backwards;animation-delay:var(--d,0ms)}
+.mo-on .mo-h.mo-in{animation:moWipe 1.15s var(--mo-ease) backwards;animation-delay:var(--d,0ms)}
+.mo-on .mo-k.mo-in{animation:moPop .8s var(--mo-ease) backwards;animation-delay:calc(var(--i,0) * var(--mo-step))}
+.mo-on .tracks > .mo-k.mo-in,.mo-on .singles > .mo-k.mo-in{animation-name:moSlideIn;--mo-step:45ms}
+
+/* open menu: links arrive one by one */
+.mo-on #menu-overlay[data-open="true"] nav a,.mo-on #menu-overlay[data-open="true"] .socials a{animation:moSlideIn .5s var(--mo-ease) backwards;animation-delay:calc(var(--i,0) * 45ms + 60ms)}
+.mo-on .overlay[data-open="true"] .popup:not(.menu){animation:moPop .45s var(--mo-ease) backwards}
+
+/* buttons: light sweep + soft lift */
+.mo-on .btn{position:relative;overflow:hidden;isolation:isolate;transition:transform .35s var(--mo-ease),background .25s,border-color .25s,box-shadow .35s}
+.mo-on .btn::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.24) 50%,transparent 70%);transform:translateX(130%);transition:transform .8s var(--mo-ease)}
+.mo-on .btn:hover::after{transform:translateX(-130%)}
+.mo-on .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px -12px rgba(0,0,0,.7)}
+.mo-on .btn:active{transform:translateY(0) scale(.98)}
+
+/* icon buttons and small round links */
+.mo-on .icon-btn svg,.mo-on .socials a svg,.mo-on .platforms a svg{transition:transform .35s var(--mo-ease)}
+.mo-on .icon-btn:hover svg{transform:scale(1.12)}
+.mo-on .socials a:hover svg,.mo-on .platforms a:hover svg{transform:scale(1.14) rotate(-6deg)}
+.mo-on .platforms a:hover{transform:translateY(-3px)}
+
+/* cards: light follows the pointer, slight tilt */
+.mo-on .pcard,.mo-on .vcard,.mo-on .acard,.mo-on .panel{position:relative}
+.mo-on .pcard::after,.mo-on .vcard::after,.mo-on .acard::after,.mo-on .panel::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;
+  background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(214,232,231,.12),transparent 60%)}
+.mo-on .pcard:hover::after,.mo-on .vcard:hover::after,.mo-on .acard:hover::after,.mo-on .panel:hover::after{opacity:1}
+.mo-on .pcard,.mo-on .vcard,.mo-on .acard{transition:transform .45s var(--mo-ease),border-color .3s,box-shadow .45s}
+.mo-on .pcard:hover,.mo-on .vcard:hover,.mo-on .acard:hover{transform:perspective(900px) translateY(-6px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));box-shadow:0 26px 50px -24px rgba(0,0,0,.85)}
+.mo-on .pcard .thumb img,.mo-on .vcard .frame img,.mo-on .acard .art img{transition:transform .9s var(--mo-ease)}
+.mo-on .pcard:hover .thumb img,.mo-on .vcard:hover .frame img,.mo-on .acard:hover .art img{transform:scale(1.07)}
+
+/* text links: underline draws in */
+.mo-on .footer-nav a,.mo-on main p a{background:linear-gradient(currentColor,currentColor) 100% 100%/0 1px no-repeat;transition:background-size .4s var(--mo-ease),color .2s}
+.mo-on .footer-nav a:hover,.mo-on main p a:hover{background-size:100% 1px}
+
+/* track lists: the row slides a touch on hover */
+.mo-on .tracks li,.mo-on .singles li{transition:transform .3s var(--mo-ease),color .2s}
+.mo-on .tracks li:hover,.mo-on .singles li:hover{transform:translateX(-6px);color:#fff}
+
+/* thin red reading line on inner pages */
+.mo-progress{position:fixed;top:0;inset-inline:0;height:2px;z-index:120;pointer-events:none;background:var(--red,#A83020);transform-origin:100% 50%;transform:scaleX(0)}
+
+@media (prefers-reduced-motion:reduce){
+  .mo-on *,.mo-on *::before,.mo-on *::after{animation:none!important;transition-duration:.01ms!important}
+  .mo-on .mo:not(.mo-in),.mo-on .mo-h:not(.mo-in),.mo-on .mo-k:not(.mo-in){opacity:1}
+  .mo-progress{display:none}
+}
+
+/* ===== scroll feel (assets/js/flow.js) ===== */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+
+/* titles: letters arrive one after another, from blurred to sharp */
+@keyframes fxLetter{from{opacity:0;filter:blur(10px);transform:translateY(.35em) scale(.9)}to{opacity:1;filter:none;transform:none}}
+.fx-split .fx-w{display:inline-block;white-space:nowrap}
+.fx-split .fx-c{display:inline-block}
+.mo-on .mo-h.fx-split.mo-in{animation:none}
+.mo-on .fx-split.mo-in .fx-c{animation:fxLetter .9s var(--mo-ease) backwards;animation-delay:calc(var(--d,0ms) + var(--ci,0) * 45ms)}
+.mo-on .mo-now .fx-c{animation:none!important}
+
+/* buttons lean toward the pointer */
+.mo-on .btn,.mo-on .icon-btn,.mo-on #ia-cta a{translate:var(--fx-x,0px) var(--fx-y,0px);transition-property:transform,background,border-color,box-shadow,translate,color;transition-duration:.35s,.25s,.25s,.35s,.45s,.2s;transition-timing-function:var(--mo-ease)}
+
+@media (prefers-reduced-motion:reduce){.fx-split .fx-c{animation:none!important}}
+
+/* phones: no reading line. On iPhones the page shows through the status bar, so the line floated over the content (user 17/11) */
+@media (hover:none),(pointer:coarse){.mo-progress{display:none}}

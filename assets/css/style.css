@@ -1,0 +1,881 @@
+/* =====================================================================
+   דודי קאליש — האתר הרשמי · עיצוב משותף
+   שפה: פלטת חוברת "קול דודי" על רקע כהה עם משחק אור-צל (ע"פ לוח הסגנון המאושר)
+   ===================================================================== */
+@font-face{font-family:"Pilpel Harif";src:url("../fonts/pilpel-harif-bold.woff") format("woff");font-weight:700;font-display:swap}
+
+:root{
+  --teal:#7C9C9B; --teal-light:#ACC4C3; --teal-deep:#35605D;
+  --bg:#0C1716; --bg-2:#17302E; --bg-3:#1C3634;
+  --card:rgba(124,156,155,.10); --card-strong:rgba(124,156,155,.18); --line:rgba(172,196,195,.18);
+  --ink:#F2F7F7; --ink-soft:#C3D3D1; --ink-dim:#8FA8A6;
+  --red:#A83020; --red-deep:#8E2618;
+  --f-body:"IBM Plex Sans Hebrew","Heebo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --f-brush:"Pilpel Harif","Frank Ruhl Libre",serif;
+  --f-num:"Abril Fatface","Playfair Display",Georgia,serif;
+  --radius:16px; --radius-sm:10px; --pill:999px;
+  --header-h:80px; --gutter:clamp(16px,4vw,48px); --max:1240px;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;min-height:100vh;direction:rtl;overflow-x:clip;font-family:var(--f-body);font-weight:300;font-size:17px;line-height:1.65;color:var(--ink-soft);
+  background-color:var(--bg);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='360' viewBox='0 0 360 360'><defs><g id='q'><ellipse cx='0' cy='0' rx='7' ry='5' transform='rotate(-22)'/><path d='M6 -2V-40' stroke-width='2' fill='none'/></g><g id='e'><ellipse cx='0' cy='0' rx='7' ry='5' transform='rotate(-22)'/><path d='M6 -2V-40' stroke-width='2' fill='none'/><path d='M6 -40c4 8 14 10 12 22' stroke-width='2' fill='none'/></g><g id='b'><ellipse cx='0' cy='0' rx='7' ry='5' transform='rotate(-22)'/><ellipse cx='30' cy='-6' rx='7' ry='5' transform='rotate(-22 30 -6)'/><path d='M6 -2V-40M36 -8V-46' stroke-width='2' fill='none'/><path d='M6 -40L36 -46' stroke-width='6' fill='none'/></g><g id='s' fill='none' stroke-width='2'><path d='M-6 -10V14M4 -14V10M-11 -2L9 -7M-11 7L9 2'/></g></defs><g fill='rgba(255,255,255,0.05)' stroke='rgba(255,255,255,0.05)'><use href='%23e' transform='translate(40 80) rotate(-12)'/><use href='%23b' transform='translate(180 60) rotate(8)'/><use href='%23q' transform='translate(300 140) rotate(15)'/><use href='%23s' transform='translate(110 190) rotate(-8)'/><use href='%23b' transform='translate(60 300) rotate(-18) scale(.85)'/><use href='%23e' transform='translate(250 280) rotate(10) scale(1.1)'/><use href='%23q' transform='translate(200 200) rotate(-25) scale(.8)'/><use href='%23s' transform='translate(330 330) rotate(12) scale(.8)'/></g></svg>"),   /* faint scattered notes instead of waves (user 09/11) */
+    radial-gradient(900px 700px at 85% 0%, rgba(124,156,155,.45), transparent 65%),
+    radial-gradient(800px 700px at 8% 55%, rgba(124,156,155,.18), transparent 65%),
+    linear-gradient(180deg,#0A1413 0%,#122422 45%,#0C1716 100%);}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,h4{margin:0;font-weight:700;color:var(--ink);text-wrap:balance}
+p{margin:0}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--teal-light);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- typography ---------- */
+.brush{font-family:var(--f-brush);font-weight:700;color:var(--red);line-height:1.1}
+.title{font-size:clamp(44px,6vw,84px)}
+.title.light{color:var(--ink)}
+.eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal-light);font-weight:400;direction:ltr;text-align:right}
+/* album page and the home page's album block (user 18/11): the label above the album's name stands out more */
+#product .eyebrow,#album .eyebrow{font-size:15px;font-weight:600;color:#DCE9E8}
+.num{position:absolute;font-family:var(--f-num);font-weight:400;line-height:1;color:var(--teal);opacity:.16;pointer-events:none;user-select:none}
+
+/* ---------- layout ---------- */
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gutter)}
+.section{position:relative;padding-block:clamp(56px,9vw,120px)}
+.section-head{display:flex;align-items:baseline;gap:18px;margin-bottom:clamp(24px,4vw,44px);position:relative}
+.section-head .num{position:static;font-size:clamp(48px,6vw,80px);opacity:.3}
+.section-head h2{font-size:clamp(40px,5.5vw,72px)}
+.center{text-align:center}
+.grid{display:grid;gap:20px}
+.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:980px){.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.grid-2,.grid-3,.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-2{grid-template-columns:1fr}}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:11px 26px;border-radius:var(--pill);font-weight:500;font-size:15px;line-height:1;border:1.5px solid transparent;transition:background .2s,color .2s,border-color .2s,transform .2s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-deep)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:rgba(255,255,255,.55)}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+.btn-teal{background:var(--teal);color:#0C1716}
+.btn-teal:hover{background:var(--teal-light)}
+.btn-line{background:transparent;color:var(--teal-light);border-color:var(--teal)}
+.btn-line:hover{background:rgba(124,156,155,.12)}
+.btn-trailer{background:transparent;color:var(--teal-light);border:1.5px solid var(--teal);border-radius:var(--pill);padding:5px;padding-inline:20px 7px;gap:10px;min-height:48px;transition:background .3s,color .3s,border-color .3s,transform .2s}
+.btn-trailer .ic{flex:none;width:34px;height:34px;border-radius:50%;background:rgba(124,156,155,.18);display:grid;place-items:center;transition:background .3s,color .3s}
+.btn-trailer .ic svg{width:18px;height:18px}
+.btn-trailer:hover,.btn-trailer:focus-visible{background:rgba(124,156,155,.14);border-color:var(--teal-light);color:#fff}
+.btn-trailer:hover .ic,.btn-trailer:focus-visible .ic{background:var(--teal);color:#0C1716}
+@media (prefers-reduced-motion:reduce){.btn-trailer,.btn-trailer .ic{transition:none}}
+.btn-lg{min-height:54px;padding:14px 32px;font-size:16px}
+.icon-btn{width:44px;height:44px;border-radius:50%;display:inline-grid;place-items:center;color:var(--ink);transition:background .2s,color .2s}
+.icon-btn svg{width:22px;height:22px}
+.icon-btn:hover{background:rgba(255,255,255,.08)}
+.icon-btn.red{background:var(--red);color:#fff}
+.icon-btn.red:hover{background:var(--red-deep)}
+.icon-btn.teal{background:var(--teal);color:#0C1716}
+
+/* ---------- header ---------- */
+.site-header{position:fixed;inset-inline:0;top:0;height:var(--header-h);z-index:50;display:flex;align-items:center;justify-content:space-between;padding-inline:clamp(16px,3vw,40px);transition:background .3s,backdrop-filter .3s}
+.site-header{pointer-events:none}.site-header>*{pointer-events:auto}
+.site-header.solid{background:rgba(12,23,22,.95);border-bottom:1px solid rgba(172,196,195,.08)}
+.site-header .logo{position:absolute;inset-inline:0;margin-inline:auto;width:max-content;font-family:var(--f-brush);font-size:30px;color:var(--ink);line-height:1;top:50%;transform:translateY(-50%);opacity:0;transition:opacity .3s;pointer-events:none}
+.site-header.solid .logo,.site-header.inner .logo{opacity:1;pointer-events:auto}
+.site-header .icon-btn{color:var(--teal-light);width:54px;height:54px;transition:color .45s ease,background .2s}
+/* home opening: red over the light photo; once the screen turns dark they take the album turquoise (assets/anim/hero.js) */
+.hdr-on-photo .site-header .icon-btn{color:var(--red)}
+.site-header .icon-btn svg{width:30px;height:30px}
+.site-header .hdr-left{display:flex;align-items:center;gap:4px}
+.site-header .icon-btn:hover{background:rgba(255,255,255,.08)}
+.site-header .cart-count{position:absolute;top:4px;inset-inline-start:4px;min-width:18px;height:18px;padding-inline:5px;border-radius:9px;background:var(--red);color:#fff;font-size:11px;font-weight:500;display:grid;place-items:center}
+.site-header .cart-wrap{position:relative}
+body{padding-top:0}
+.page-top{padding-top:calc(var(--header-h) + 32px)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;display:grid;align-items:end;overflow:hidden;isolation:isolate;
+  background:radial-gradient(70% 110% at 100% 20%, rgba(172,196,195,.85) 0%, rgba(124,156,155,.5) 35%, rgba(124,156,155,0) 70%),
+             linear-gradient(90deg,#040A0A 0%,#0B1716 42%,#2E5552 100%)}
+.hero-img{position:absolute;inset:0;z-index:-1}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,23,22,0) 45%,rgba(12,23,22,.92) 100%),linear-gradient(90deg,rgba(12,23,22,.75) 0%,rgba(12,23,22,0) 45%)}
+.hero-img .mobile{display:none}
+.hero-content{position:relative;padding:0 var(--gutter) clamp(48px,8vh,96px);display:grid;justify-items:center;text-align:center;gap:18px}
+.hero-presenter{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:#fff;direction:ltr;text-shadow:0 2px 14px rgba(0,0,0,.8)}
+.hero-sub{text-shadow:0 2px 14px rgba(0,0,0,.7)}
+.hero-name{font-family:var(--f-brush);font-size:clamp(72px,13vw,170px);line-height:.95;color:#fff;text-shadow:0 20px 60px rgba(0,0,0,.5)}
+.hero-sub{font-size:clamp(17px,2vw,21px);color:var(--ink-soft);max-width:44ch}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.hero-rail{position:absolute;bottom:clamp(40px,8vh,90px);display:flex;flex-direction:column;align-items:center;gap:18px}
+.hero-rail::before{content:"";width:1px;height:70px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.7))}
+.hero-rail.right{inset-inline-start:clamp(14px,3vw,40px)}
+.hero-rail.left{inset-inline-end:clamp(14px,3vw,40px)}
+.hero-rail a{width:28px;height:28px;color:#fff;opacity:.9;transition:opacity .2s,transform .2s}
+.hero-rail a:hover{opacity:1;transform:scale(1.1)}
+.hero-rail svg{width:100%;height:100%}
+
+/* ---------- album ---------- */
+.album{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:center}
+.album-art{position:relative;aspect-ratio:1;max-width:520px;margin-inline:auto;width:100%}
+.album-art .vinyl{position:absolute;inset:6% auto 6% -34%;width:88%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, #0B1514 0 14%, #1A2C2B 14.5% 16%, #0B1514 16.5% 18%, #141F1E 18.5%, #0A1312 60%, #1A2C2B 61%, #0A1312 62% 100%);
+  box-shadow:0 30px 70px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.06);animation:spin 18s linear infinite}
+.album-art .vinyl::after{content:"";position:absolute;inset:36%;border-radius:50%;background:var(--teal-deep) url("../img/album-cover-600.webp") center/cover;box-shadow:inset 0 0 0 2px rgba(0,0,0,.6)}
+.album-art .cover{position:relative;z-index:1;width:88%;aspect-ratio:1;object-fit:cover;border-radius:12px;box-shadow:0 40px 90px -20px rgba(0,0,0,.8),0 0 90px rgba(172,196,195,.18);margin-inline-start:auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.album-art .vinyl{animation:none}}
+.album-copy{display:grid;gap:18px;justify-items:start}
+.album-copy h2{font-size:clamp(48px,7vw,100px)}
+.tracks{list-style:none;margin:0;padding:0;columns:2;column-gap:32px;font-size:16px;color:var(--ink)}
+.tracks li{display:flex;gap:10px;padding:4px 0;break-inside:avoid}
+.tracks li b{font-family:var(--f-num);font-weight:400;color:var(--red);min-width:26px;direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- listen (stacked fan) ---------- */
+.listen{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);align-items:center}
+.listen-copy{display:grid;gap:18px;justify-items:start}
+.listen-copy h2{font-size:clamp(48px,7vw,100px)}
+.platforms{display:flex;flex-wrap:wrap;gap:12px}
+.platforms a{width:46px;height:46px;border-radius:50%;background:var(--teal);color:#0C1716;display:grid;place-items:center;transition:transform .2s,background .2s}
+.platforms a:hover{transform:translateY(-2px);background:var(--teal-light)}
+.platforms svg{width:24px;height:24px}
+.fan{position:relative;height:min(520px,80vw);width:min(520px,80vw);margin-inline:auto}
+.fan .card{position:absolute;inset:12%;border-radius:18px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);transform-origin:50% 120%;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .4s,filter .4s}
+.fan .card img{width:100%;height:100%;object-fit:cover;transform:scale(1.34)}
+.fan .card .ph{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(calc(160deg + var(--h,0deg) * .25),rgb(150,178,177) 0%,rgb(110,142,141) 45%,rgb(30,52,51) 100%)}
+.fan .card .ph span{font-family:var(--f-brush);color:var(--red);font-size:clamp(40px,5vw,64px);line-height:1;transform:translateY(-14%)}
+.fan .card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;transform:none}
+.fan .card .cap{display:none;position:absolute;inset-inline:0;bottom:0;padding:18px;background:linear-gradient(180deg,transparent,rgba(12,23,22,.9));font-family:var(--f-brush);font-size:34px;color:#fff;line-height:1}
+.fan .card .play{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:rgba(124,156,155,.85);color:#0C1716;display:grid;place-items:center;opacity:0;transition:opacity .25s}
+.fan .card:hover .play{opacity:1}
+.fan .card .play svg{width:34px;height:34px}
+.fan-nav{display:flex;justify-content:center;gap:10px;margin-top:14px}
+.fan-nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);color:var(--ink);display:grid;place-items:center}
+.fan-nav button:hover{background:rgba(255,255,255,.08)}
+.fan-nav svg{width:18px;height:18px}
+
+/* ---------- product cards ---------- */
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(6px);transition:transform .25s,border-color .25s}
+.pcard:hover{transform:translateY(-4px);border-color:rgba(172,196,195,.4)}
+.pcard .thumb{display:block;aspect-ratio:1;border-radius:var(--radius-sm);overflow:hidden;background:var(--bg-3);position:relative}
+.pcard .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.pcard:hover .thumb img{transform:scale(1.04)}
+.pcard .tag{position:absolute;top:10px;inset-inline-end:10px;background:rgba(12,23,22,.85);color:var(--teal-light);font-size:11px;letter-spacing:.14em;padding:4px 9px;border-radius:var(--pill);font-weight:500}
+.pcard h3{font-size:17px;font-weight:500;color:var(--teal-light);line-height:1.3}
+.pcard .foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.price{font-family:var(--f-num);font-size:20px;color:var(--ink);font-variant-numeric:tabular-nums;direction:rtl;unicode-bidi:isolate;display:inline-block}
+.buy-price{font-size:28px;margin-inline-end:6px}
+.price small{font-size:.7em;color:var(--ink-dim)}
+.price s{font-size:.7em;color:var(--ink-dim);margin-inline-start:6px;white-space:nowrap}
+#cart-total s,.sum-row s,#cart-items .qty small s{font-size:.8em;font-weight:400;color:var(--ink-dim);margin-inline-start:6px}
+.sale-note{font-size:14px;color:var(--teal-light);margin-top:8px}
+.preorder-note{color:var(--teal-light)}
+
+/* ---------- video cards ---------- */
+.vcard{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--card);border:1px solid var(--line);padding:12px;backdrop-filter:blur(6px);cursor:pointer;transition:transform .25s,border-color .25s}
+.vcard:hover{transform:translateY(-4px);border-color:rgba(172,196,195,.4)}
+.vcard .frame{position:relative;aspect-ratio:16/9;border-radius:var(--radius-sm);overflow:hidden;background:var(--bg-3)}
+.vcard .frame img{width:100%;height:100%;object-fit:cover}
+.vcard .frame .play{position:absolute;inset:0;margin:auto;width:58px;height:58px;border-radius:14px;background:rgba(124,156,155,.9);color:#0C1716;display:grid;place-items:center;transition:transform .2s,background .2s}
+.vcard:hover .frame .play{transform:scale(1.08);background:var(--teal-light)}
+.vcard .frame .play svg{width:30px;height:30px}
+.vcard .frame .cap{position:absolute;inset-inline:0;bottom:0;padding:14px;background:linear-gradient(180deg,transparent,rgba(12,23,22,.85));font-family:var(--f-brush);font-size:28px;color:#fff;line-height:1}
+.vcard .meta{display:flex;justify-content:space-between;align-items:center;padding:10px 4px 0;font-size:13px;color:var(--ink-dim)}
+.vcard .meta b{font-weight:500;color:var(--ink);flex:none}
+.vcard .meta{gap:12px}
+/* names with a middle dot between them; a dot that lands at the start of a line is clipped, so no line starts or ends with a dot */
+.vcard .meta .who{min-width:0;flex:1;line-height:1.5;overflow:hidden}
+.vcard .meta .who>span{display:block;margin-inline-start:-1.1em}
+.vcard .meta .who i{font-style:normal;display:inline-block;max-width:100%;vertical-align:top}
+.vcard .meta .who i::before{content:"·";display:inline-block;width:1.1em;text-align:center}
+@media (max-width:600px){.vcard .meta{flex-direction:column;align-items:stretch;gap:2px}}   /* phones: two narrow cards in a row, the year goes under the names */
+
+/* ---------- filters ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:clamp(24px,4vw,40px)}
+.filters button{padding:9px 20px;border-radius:var(--pill);border:1px solid var(--line);color:var(--ink-soft);font-size:15px;transition:background .2s,color .2s,border-color .2s}
+.filters button:hover{border-color:var(--teal-light);color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--teal);color:#0C1716;border-color:var(--teal)}
+
+/* ---------- shows ---------- */
+.show{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;padding:22px 32px 22px 22px;border-radius:var(--pill);overflow:hidden;background:var(--card-strong);border:1px solid var(--line);isolation:isolate}
+.show + .show{margin-top:18px}
+.show .bg{position:absolute;inset:0;z-index:-1;opacity:.35;background-size:cover;background-position:center;filter:saturate(.6)}
+.show .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(124,156,155,.55),rgba(12,23,22,.7))}
+.show .date{font-family:var(--f-num);font-size:clamp(30px,4vw,46px);line-height:1;color:#fff;text-align:center;min-width:110px;padding-inline:8px}
+.show .date small{display:block;font-family:var(--f-body);font-size:12px;letter-spacing:.2em;margin-top:6px;color:var(--teal-light)}
+.show h3{font-family:var(--f-brush);font-size:clamp(28px,3.6vw,44px);color:#fff;line-height:1.1}
+.show p{color:var(--ink-soft);margin-top:4px}
+.show .btn{min-height:54px}
+.shows-empty{text-align:center;padding:40px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--ink-dim)}
+
+/* ---------- about ---------- */
+.about{display:grid;grid-template-columns:1fr .8fr;gap:clamp(28px,5vw,72px);align-items:center}
+.about-copy{display:grid;gap:16px;font-size:clamp(17px,1.4vw,19px);line-height:1.8}
+.about-copy h2{font-size:clamp(48px,7vw,100px)}
+.about-img{position:relative;aspect-ratio:3/4;border-radius:var(--pill);overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.8);max-width:420px;margin-inline:auto}
+.about-img img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.about-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(12,23,22,.6))}
+
+/* ---------- footer / newsletter ---------- */
+.site-footer{position:relative;margin-top:clamp(40px,6vw,80px);isolation:isolate;overflow:hidden}
+.site-footer .bg{position:absolute;inset:0;z-index:-1;background:url("../img/scene-belz.webp") center/cover;opacity:.18;filter:saturate(.3);-webkit-mask-image:linear-gradient(transparent,#000 45%);mask-image:linear-gradient(transparent,#000 45%)}
+.site-footer .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,23,22,.6),rgba(12,23,22,.95))}
+.newsletter{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,72px);align-items:center;padding-block:clamp(56px,8vw,100px)}
+.newsletter h2{font-size:clamp(56px,7vw,96px)}
+.newsletter p{font-size:18px;color:var(--ink);margin-top:10px;max-width:30ch}
+.form{display:grid;gap:12px}
+.field{position:relative}
+.field input,.field textarea{width:100%;min-height:54px;padding:14px 20px;border-radius:var(--pill);border:1px solid var(--line);background:rgba(12,23,22,.55);color:var(--ink);font:inherit;font-size:16px;transition:border-color .2s,background .2s}
+.field textarea{border-radius:22px;min-height:120px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:var(--ink-dim)}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--teal-light);background:rgba(12,23,22,.8)}
+.field input[type="email"],.field input[type="tel"]{direction:ltr;text-align:right}
+.check{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft)}
+.check input{width:15px;height:15px;accent-color:var(--teal)}
+.check a{color:var(--teal-light);text-decoration:underline;text-underline-offset:3px}
+.form .btn{justify-self:start}
+#newsletter-form .btn{justify-self:end}
+#newsletter-form{grid-template-columns:1fr auto;align-items:center}   /* consent and the join button on one row (user 09/11) */
+#newsletter-form .field,#newsletter-form .form-msg{grid-column:1/-1}
+#newsletter-form .form-msg{order:9}
+#newsletter-form .form-msg:empty{display:none}
+.form-msg{font-size:14px;color:var(--teal-light);min-height:1.2em}
+.footer-bar{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;padding-block:28px 36px;border-top:1px solid var(--line)}
+.footer-nav{display:flex;flex-wrap:wrap;gap:4px 0;align-items:center;font-size:14px}
+.footer-nav a{padding:6px 10px;color:var(--ink-soft)}
+.footer-nav a:hover,.footer-nav a[aria-current="page"]{color:var(--ink)}
+.footer-nav a + a::before{content:"|";color:var(--line);margin-inline-end:10px}
+.footer-meta{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.footer-meta .terms{font-size:14px;color:var(--ink-soft)}
+.socials{display:flex;gap:10px}
+.socials a{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink);transition:background .2s,border-color .2s}
+.socials a:hover{background:rgba(255,255,255,.08);border-color:var(--teal-light)}
+.socials svg{width:20px;height:20px}
+.credits{display:flex;justify-content:center;gap:10px;align-items:baseline;padding:18px;background:#070F0E;font-size:12px;color:var(--ink-dim);letter-spacing:.06em}
+.credits a{color:var(--teal-light)}
+.credits{flex-wrap:wrap;row-gap:6px}
+@media (max-width:759px){.credits .copy{flex-basis:100%;text-align:center}.credits .sep{display:none}}   /* phones: copyright on its own line, credit under it */
+
+/* ---------- popups ---------- */
+.overlay{position:fixed;inset:0;z-index:90;background:rgba(5,11,11,.72);backdrop-filter:blur(4px);display:grid;place-items:center;padding:16px;opacity:0;pointer-events:none;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+.overlay[data-open="true"]{opacity:1;pointer-events:auto;visibility:visible;transition:opacity .25s}
+.popup{position:relative;width:min(560px,100%);background:linear-gradient(160deg,rgba(28,54,52,.95),rgba(12,23,22,.97));border:1px solid var(--line);border-radius:22px;padding:clamp(24px,4vw,40px);box-shadow:0 40px 100px -20px rgba(0,0,0,.8);transform:translateY(16px) scale(.98);transition:transform .3s}
+.overlay[data-open="true"] .popup{transform:none}
+.popup .close{position:absolute;top:14px;inset-inline-start:14px}
+.popup h2{font-size:clamp(44px,6vw,64px);margin-bottom:18px}
+.popup.menu{width:min(420px,100%);text-align:center;padding-block:56px 40px}
+.popup.menu nav{display:grid;gap:6px;margin-bottom:28px;text-align:center}
+.popup.menu nav a{font-family:var(--f-body);font-weight:400;font-size:clamp(22px,3vw,26px);line-height:1.5;color:var(--teal-light);transition:color .2s}
+.popup.menu nav a[aria-current="page"]{color:#fff}
+.popup.menu nav a:hover{color:var(--red)}
+.popup.menu .socials{justify-content:center}
+/* the menu drops down right under the menu button (not a centred layer) */
+#menu-overlay{place-items:start;padding:0;background:rgba(5,11,11,.35);backdrop-filter:none}
+#menu-overlay .popup.menu{position:absolute;top:calc(var(--header-h) - 10px);inset-inline-start:clamp(16px,3vw,40px);width:min(340px,calc(100vw - 32px));max-height:calc(100svh - var(--header-h) - 16px);overflow:auto;
+  padding:48px 28px 28px;border-radius:18px;transform-origin:top right;transform:translateY(-8px) scale(.96)}
+#menu-overlay[data-open="true"] .popup.menu{transform:none}
+#menu-overlay .popup.menu nav a{font-size:clamp(20px,2.4vw,24px)}
+#menu-overlay .popup.menu .close{top:10px;inset-inline-start:10px}
+.popup.success{text-align:center}
+.popup.success > svg{width:56px;height:56px;color:var(--teal-light);margin-inline:auto;margin-bottom:12px}
+
+/* ---------- cart drawer ---------- */
+.drawer{position:fixed;top:0;bottom:0;left:0;width:min(400px,92vw);z-index:95;background:linear-gradient(160deg,rgba(28,54,52,.97),rgba(12,23,22,.98));border-right:1px solid var(--line);box-shadow:30px 0 80px rgba(0,0,0,.6);transform:translateX(-105%);visibility:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),visibility 0s .35s;display:grid;grid-template-rows:auto 1fr auto;padding:20px}
+.drawer[data-open="true"]{transform:none;visibility:visible;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.drawer header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.drawer header h3{font-family:var(--f-brush);font-size:36px}
+.drawer .items{overflow:auto;display:grid;gap:12px;align-content:start;padding-block:6px}
+.drawer .item{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px}
+.drawer .item img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+.drawer .item b{display:block;font-weight:500;color:var(--ink);font-size:15px;line-height:1.3}
+.drawer .item small{color:var(--ink-dim)}
+.drawer .item .qty{display:flex;align-items:center;gap:6px;margin-top:6px}
+.drawer .item .qty button{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center}
+.drawer .item .remove{color:var(--ink-dim)}
+.drawer .item .remove:hover{color:var(--red)}
+.drawer .empty{color:var(--ink-dim);text-align:center;padding:40px 10px}
+.cart-note{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:start;background:rgba(124,156,155,.14);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--ink);font-size:15px;line-height:1.5;margin-bottom:12px}
+.cart-note>svg{width:20px;height:20px;color:var(--teal-light);margin-top:2px}
+.cart-note .icon-btn{width:44px;height:44px;margin:-12px -10px -12px -12px;color:var(--ink-dim)}
+.cart-note .icon-btn svg{width:18px;height:18px}
+.drawer footer{border-top:1px solid var(--line);padding-top:16px;display:grid;gap:10px}
+.drawer .total{display:flex;justify-content:space-between;font-weight:500;color:var(--ink)}
+
+/* ---------- lightbox ---------- */
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(5,11,11,.9);display:grid;place-items:center;padding:16px;opacity:0;pointer-events:none;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+.lightbox[data-open="true"]{opacity:1;pointer-events:auto;visibility:visible;transition:opacity .25s}
+.lightbox .frame{width:min(1100px,100%);aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.8)}
+.lightbox iframe{width:100%;height:100%;border:0;display:block}
+.lightbox .close{position:absolute;top:16px;inset-inline-start:16px}
+
+/* ---------- product page ---------- */
+.product{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:start}
+.product .gallery{position:sticky;top:calc(var(--header-h) + 20px)}
+.product .gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius);box-shadow:0 40px 90px -30px rgba(0,0,0,.8)}
+.product .info{display:grid;gap:18px}
+.product .info h1{font-size:clamp(44px,6vw,80px)}
+.product .desc{display:grid;gap:10px;font-size:15px;line-height:1.7}
+.product .desc ul{margin:0;padding-inline-start:20px;display:grid;gap:4px}
+.options{display:flex;flex-wrap:wrap;gap:10px}
+.options label{cursor:pointer}
+.options input{position:absolute;opacity:0;pointer-events:none}
+.options span{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--pill);border:1.5px solid var(--line);color:var(--ink);transition:border-color .2s,background .2s}
+.options input:checked + span{border-color:var(--teal-light);background:rgba(124,156,155,.18)}
+.options input:focus-visible + span{outline:2px solid var(--teal-light);outline-offset:2px}
+.buy-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.qty-box{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:var(--pill);overflow:hidden}
+.qty-box button{width:44px;height:46px;display:grid;place-items:center}
+.qty-box input{width:44px;text-align:center;background:none;border:0;color:var(--ink);font:inherit;font-size:16px}
+.digital{letter-spacing:.3em;font-size:13px;color:var(--teal-light);text-align:center;margin-top:12px}
+
+/* ---------- cart page ---------- */
+.cart-page{display:grid;grid-template-columns:1.4fr .8fr;gap:28px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,3vw,28px);backdrop-filter:blur(6px)}
+.panel h2{font-size:28px;margin-bottom:14px}
+.cart-table{width:100%;border-collapse:collapse;font-size:15px}
+.cart-table th{text-align:start;font-weight:500;color:var(--ink-dim);padding:8px 10px;border-bottom:1px solid var(--line);font-size:13px;letter-spacing:.06em}
+.cart-table td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+.cart-table img{width:56px;height:56px;border-radius:8px;object-fit:cover}
+/* remove buttons in the album red (user 10/11) */
+.cart-table [data-rm],.drawer .item .remove{color:var(--red)}
+.cart-table [data-rm]:hover,.drawer .item .remove:hover{color:var(--red-deep)}
+.sum-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}
+.sum-row.total{font-weight:500;color:var(--ink);font-size:18px;border:0}
+.pay-note{font-size:13px;color:var(--ink-dim);line-height:1.6;text-align:center}
+#checkout-form .check{justify-content:center}   /* centred under the fields (user 10/11) */
+
+/* ---------- misc pages ---------- */
+.prose{max-width:76ch;margin-inline:auto;font-size:16px;line-height:1.9}
+.prose h2{font-size:22px;margin:28px 0 8px;font-weight:500;color:var(--teal-light)}
+.prose h1{font-size:clamp(48px,7vw,88px);margin-bottom:20px}
+.prose p{margin-bottom:10px}
+.empty-state{text-align:center;padding:60px 20px;color:var(--ink-dim)}
+
+/* ---------- reveal on scroll ---------- */
+.reveal{opacity:1;transform:none}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  :root{--header-h:64px}
+  .album,.listen,.about,.newsletter,.product,.cart-page{grid-template-columns:1fr}
+  .album-art{max-width:380px}
+  .listen-copy,.album-copy{justify-items:center;text-align:center}
+  .about-img{max-width:320px;order:-1}
+  .product .gallery{position:static}
+  .show{grid-template-columns:1fr;text-align:center;border-radius:28px;padding:24px}
+  .show .date{min-width:0}
+  .footer-bar{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .footer-meta{justify-content:center}
+  .tracks{columns:2;column-gap:18px;font-size:15px}   /* two columns on phones too (user 09/11) */
+  .tracks li{white-space:nowrap;gap:8px}
+  .tracks li b{min-width:20px}
+  .hero-img .desktop{display:none}.hero-img .mobile{display:block}
+  .hero-rail{bottom:clamp(24px,6vh,60px)}
+  .hero-rail::before{height:40px}
+  .site-header .logo{font-size:26px}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .hero-name{font-size:clamp(64px,19vw,110px)}
+  .fan .card .cap{font-size:26px;padding:12px}
+  .vcard .frame .cap{font-size:22px}
+  .cart-table th:nth-child(3),.cart-table td:nth-child(3){display:none}
+}
+
+/* דף תודה: מצב ההזמנה וקישורי ההורדה */
+.thanks-lead{font-size:22px;color:var(--teal-light);margin-top:16px}
+.thanks-help{margin-top:18px;color:var(--ink-soft)}
+.thanks-help a{color:var(--teal-light);direction:ltr;display:inline-block}
+.downloads{display:grid;gap:12px;max-width:520px;margin:26px auto 0}
+.downloads a{display:flex;align-items:center;justify-content:center;gap:10px;min-height:54px}
+.downloads svg{width:20px;height:20px;flex:none}
+/* שדה מייל: השלמת סיומות */
+.email-suggest{position:absolute;inset-inline:0;top:calc(100% + 6px);z-index:40;margin:0;padding:6px;list-style:none;border-radius:16px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(28,54,52,.98),rgba(12,23,22,.98));box-shadow:0 20px 50px -10px rgba(0,0,0,.7);direction:ltr;text-align:left;max-height:300px;overflow:auto}
+.email-suggest li{min-height:44px;display:flex;align-items:center;padding:0 14px;border-radius:10px;color:var(--ink-soft);cursor:pointer;font-size:15px}
+.email-suggest li b{color:var(--ink);font-weight:500}
+.email-suggest li[aria-selected="true"],.email-suggest li:hover{background:var(--card-strong);color:var(--ink)}
+.field input[data-email]{direction:ltr;text-align:right}
+.field input[data-email]:not(:placeholder-shown){text-align:left}
+
+/* ---------- home: the about text at the very end, beside the name (wide screens; assets/js/home.js builds it) ---------- */
+#intro .ia-about-end{display:none}
+#intro .ia-finale{position:relative}
+#intro .ia-about-anchor{position:absolute;bottom:135vh;bottom:135svh;width:1px;height:1px}
+@media (min-width:1100px){
+  #intro .ia-row.moved-to-end{display:none}
+  #intro .ia-about-end{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;
+    opacity:clamp(0,calc(var(--intro-name,0) * 1.4 * var(--intro-about,1)),1)}
+  #intro .ia-about-end .col{position:absolute;display:grid;gap:12px;font-size:clamp(14px,1.05vw,16px);line-height:1.75;color:var(--ink-soft);
+    translate:0 calc((1 - var(--intro-name,0)) * 22px);text-shadow:0 2px 14px rgba(5,11,11,.8)}
+  #intro .ia-about-end p{margin:0}
+  #intro .ia-about-end .a{left:30%;top:30%;width:min(21%,330px)}
+  #intro .ia-about-end .b{left:8%;top:30%;width:min(21%,330px)}
+}
+/* home ending: the light-to-dark backdrop gives way to one solid dark colour as Dudi steps onto the podium
+   and the about text appears, so the about screen has no glow around it (user 18/11) */
+#intro .ia-hero::after{content:"";position:absolute;inset:0;background:var(--ia-ink,#0C1716);opacity:var(--intro-end,0);pointer-events:none}
+/* home: no wavy-line texture showing through under the opening and its transition (user 08/11: "פסים מיותרים מאחורה") */
+body:has(#intro){background-image:none}
+/* home shop block: one framed block on the left */
+#intro .ia-side.shop-all{justify-items:stretch}
+#intro .ia-side.shop-all .btn{justify-self:start}
+/* ending (wide screens): the about text runs as two columns — the right one fills to the bottom, the rest flows
+   into the left one — and the two end buttons sit stacked in the empty part of the left column */
+@media (min-width:1100px){
+  #intro .ia-about-end .txt{position:absolute;left:8%;top:30%;width:min(47%,740px);height:56%;
+    column-count:2;column-gap:2.4vw;column-fill:auto;font-size:clamp(13px,min(1.05vw,1.85vh),16px);line-height:1.7;color:var(--ink-soft);
+    translate:0 calc((1 - var(--intro-name,0)) * 22px);text-shadow:0 2px 14px rgba(5,11,11,.8)}
+  #intro .ia-about-end .txt p{margin:0 0 12px}
+  .about-at-end #intro .cta{left:calc(8% + (min(47%,740px) - 2.4vw) / 4)!important;top:var(--about-btn-top,auto)!important;bottom:var(--about-btn-bottom,12%)!important;
+    flex-direction:column;align-items:stretch;width:min(20%,300px)}
+  .about-at-end #intro .cta a{justify-content:center}
+}
+#intro .book{cursor:pointer}
+/* the paragraph "על הבמה..." opens the next (left) column (user 08/11) */
+@media (min-width:1100px){#intro .ia-about-end .txt p:nth-child(3){break-before:column;-webkit-column-break-before:always}}
+/* listen block (user 08/11): everything on the left in one frame; the cover stack sits under the platforms */
+#intro .ia-side.listen-all .fan-wrap{translate:-70px 0}
+
+
+/* wide screens: after the last box (the shop) an empty stretch, so the album grows back only once the shop has
+   scrolled away (user 08/11; assets/anim/hero.js) */
+/* more scroll for every box, so the pages turn more slowly (user 08/11) */
+@media (min-width:1100px){#intro .ia-content{padding-bottom:130vh;padding-bottom:130svh}}
+/* wide screens (user 08/11): no frames, the blocks simply follow one another on the screen with an even gap */
+@media (min-width:1100px){
+  #intro .ia-content .ia-row{min-height:0;padding-block:16vh}
+  #intro .ia-herozone + .ia-row{padding-top:24vh}
+  #intro .ia-side::before{display:none}
+  #intro .ia-side{padding:0 8px}
+}
+@media (max-width:1099px){#intro .ia-content .ia-row{padding-block:55vh 20vh}}
+/* 24/11: narrow screens — the boxes pass over the album, and its pages now turn only while no box covers it (intro.js),
+   so there is an open stretch between one box and the next in which the album shows and turns a few pages */
+@media (max-width:1099px){#intro .ia-content .ia-row + .ia-row{padding-top:95vh;padding-top:95svh}#intro .ia-content .ia-row{padding-bottom:35vh;padding-bottom:35svh}}
+/* wide screens (user 08/11): the album stands on the right, the boxes run on the left (the earlier trial with the sides swapped was removed) */
+
+/* home: once the ending starts to scroll away, its side icons fade out before they reach the top buttons (user 08/11) */
+.intro-leaving #intro .hero-rail{opacity:0!important;pointer-events:none!important;transition:opacity .25s}
+
+/* phones (user 08/11, "must be 100% mobile"): centred cover stack, platforms on one row, one-column track list */
+@media (max-width:759px){
+  #intro .ia-side{padding:28px 20px}
+  #intro .ia-side.listen-all .fan-wrap{translate:0 0;display:grid;justify-items:center}
+  #intro .ia-side .fan{width:min(300px,100%);margin-inline:auto}
+  #intro .ia-side .fan-nav{justify-content:center}
+  #intro .ia-side .platforms,.platforms{flex-wrap:nowrap;justify-content:center;gap:10px}
+  .platforms a{width:44px;height:44px;flex:none}
+  .platforms svg{width:22px;height:22px}
+  #intro .ia-row .ia-side .tracks{columns:2;column-gap:18px;font-size:15px;justify-self:stretch;width:100%}
+  #intro .ia-row .ia-side .tracks li{white-space:nowrap;gap:8px}
+  #intro .ia-row .ia-side .tracks li b{min-width:20px}
+  #intro .ia-side .tracks li{padding:3px 0}
+}
+/* phones: once the photo is gone, the top bar gets a dark band and carries the name, so the content scrolling up
+   does not run into the buttons */
+@media (max-width:759px){
+  /* the dark band and the name in the bar: always on inner pages; on the home page they fade in only as the big
+     name, rising from the photo, reaches the top (--dock from assets/anim/hero.js; user 08/11) */
+  .site-header{height:calc(var(--header-h) + 16px);padding-bottom:16px}
+  .site-header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:linear-gradient(180deg,var(--hb) 0%,color-mix(in srgb,var(--hb) 96%,transparent) 86%,color-mix(in srgb,var(--hb) 0%,transparent) 100%);opacity:var(--dock,1)}
+  .site-header .logo{opacity:var(--dock,1);pointer-events:auto}
+  .site-header,.site-header.solid{border-bottom:0}
+  #intro .ia-hero-name,#intro .ia-hero-en{opacity:clamp(0,calc((1 - var(--intro-name,0) * 3) * (1 - var(--dock,0))),1)}
+}
+/* phones: every tappable thing at least finger size (44px) */
+@media (max-width:759px){
+  .acard .links a,.acard .links button{min-height:44px}
+  .footer-nav{justify-content:center}
+  .footer-nav a{padding:12px 10px;display:inline-flex;align-items:center;min-height:44px}
+  .footer-bar,.footer-meta{justify-content:center;text-align:center}
+  .footer-meta > a{display:inline-flex;align-items:center;min-height:44px}
+  .socials{justify-content:center;flex-wrap:nowrap;gap:8px}   /* always one row (user 09/11) */
+  .socials a{width:44px;height:auto;aspect-ratio:1;flex:0 1 44px;min-width:0}
+  .check{min-height:40px;font-size:12.5px}   /* smaller consent line (user 09/11) */
+  .check input{width:17px;height:17px;flex:none}
+  .check a{display:inline-flex;align-items:center;min-height:44px}
+}
+/* phones: the English name spaced out under the Hebrew logo, like on the opening screen (user 08/11) */
+@media (max-width:759px){
+  .site-header .logo{text-align:center;font-size:28px}
+  .site-header .logo::after{content:"DUDI KALISH";display:block;direction:ltr;margin-top:6px;margin-inline-end:-1.2em;font-family:var(--f-body,'IBM Plex Sans Hebrew',sans-serif);font-weight:300;font-size:10px;letter-spacing:1.2em;line-height:1;color:inherit}
+}
+/* phones: the open album gets a moment on its own before the track list rides in (user 08/11) */
+@media (max-width:759px){#intro .ia-content .ia-herozone + .ia-row{padding-top:85vh;padding-top:85svh}}
+/* phones: the "about" text is one frame, not two boxes with the album showing through the gap (user 08/11) */
+@media (max-width:1099px){
+  #intro #about.ia-row{gap:0}
+  #intro #about .ia-side::before{background:rgba(10,20,19,.62)}
+  #intro #about .ia-side.r{padding-bottom:7px}
+  #intro #about .ia-side.l{padding-top:7px}
+  #intro #about .ia-side.r::before{border-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0;bottom:-1px}
+  #intro #about .ia-side.l::before{border-top:0;border-top-left-radius:0;border-top-right-radius:0}
+}
+/* phones: the about card rides up over Dudi once he has stepped out (user 08/11; assets/js/home.js sets its place) */
+@media (max-width:759px){
+  .about-beside-dudi #intro #ia-finale > #about{position:absolute;inset-inline:16px;z-index:4;padding:0;min-height:0;margin:0;display:grid;justify-content:stretch}
+}
+/* the name in the top bar in the album's turquoise (user 08/11) */
+.site-header .logo{color:var(--teal-light)}
+/* the brush font draws "דודי" smaller than "קאליש"; the first word is set a size up so both read the same (user 08/11) */
+.site-header .logo .l1{font-size:1.28em;line-height:0;vertical-align:-.04em}
+/* the big name on the opening photo: "דודי" a size up as well, to match "קאליש" (user 08/11) */
+#intro .ia-hero-name .l1{font-size:1.28em;line-height:0;vertical-align:-.04em}
+
+@media (max-width:759px){.site-footer .footer-nav{display:none}}   /* phones: no link list in the footer, the top menu has it (user 09/11) */
+
+/* stacked footer (user 09/11): icons, then the contact button, then the terms link under it */
+@media (max-width:900px){
+  .footer-bar > div,.footer-bar .footer-meta{display:contents}
+  .footer-bar .socials{order:1}
+  .footer-bar #open-contact{order:2}
+  .footer-bar .footer-meta .terms{order:3;margin-top:-12px}
+}
+
+/* home album scene (user 09/11): the top stays light, like the opening photo's backdrop; the name in it turns red to read on it */
+.hdr-on-photo .site-header.solid{background:color-mix(in srgb,var(--hb) 96%,transparent);border-bottom:0}
+.hdr-on-photo .site-header .logo{color:var(--red)}
+/* the switch between the light top (album scene) and the dark one (footer, other pages) is a slow cross-fade (user 09/11) */
+@property --hb{syntax:'<color>';inherits:true;initial-value:rgb(12 23 22)}
+.site-header{--hb:rgb(12 23 22);transition:background .8s ease,backdrop-filter .3s,--hb .2s linear}
+.hdr-on-photo .site-header{--hb:rgb(140 170 169)}
+.site-header .logo{transition:opacity .3s,color .8s ease}
+.site-header .icon-btn{transition:color .8s ease,background .2s}
+.site-header .logo::after{color:#fff}   /* the English line stays white (user 09/11) */
+/* narrow phones (user 09/11): consent line on one row, the join button under it at full width */
+@media (max-width:440px){
+  #newsletter-form{grid-template-columns:1fr}
+  #newsletter-form .check{white-space:nowrap;flex-wrap:nowrap}
+  #newsletter-form .check a{min-height:0}
+  #newsletter-form .btn{justify-self:stretch}
+}
+/* wide screens (user 09/11): the top bar gets a band too, in the colour of the backdrop under it (light in the album scene),
+   so the scrolling content passes under it; on the home page it comes in, with the name in the bar, as the rising name arrives */
+@media (min-width:760px){
+  .site-header::before{content:"";position:absolute;inset:0 0 -14px;z-index:-1;pointer-events:none;
+    background:linear-gradient(180deg,var(--hb) 0%,color-mix(in srgb,var(--hb) 96%,transparent) 82%,color-mix(in srgb,var(--hb) 0%,transparent) 100%);
+    opacity:var(--dock,1)}
+  html:has(#intro) .site-header .logo{opacity:var(--dock,1);pointer-events:auto}
+  #intro .ia-hero-name,#intro .ia-hero-en{opacity:clamp(0,calc((1 - var(--intro-name,0) * 3) * (1 - var(--dock,0))),1)}
+  .site-header .logo{text-align:center}
+  .site-header .logo::after{content:"DUDI KALISH";display:block;direction:ltr;margin-top:6px;margin-inline-end:-1.2em;font-family:var(--f-body,'IBM Plex Sans Hebrew',sans-serif);font-weight:300;font-size:10px;letter-spacing:1.2em;line-height:1;color:#fff}
+}
+/* every page (user 09/11): the top bar is light like the opening backdrop, with the name and icons in red;
+   only the home page changes it with the scroll (assets/anim/hero.js) */
+html:not(:has(#intro)) .site-header{--hb:rgb(140 170 169)}
+html:not(:has(#intro)) .site-header.solid{background:transparent;border-bottom:0}
+html:not(:has(#intro)) .site-header .logo{color:var(--red)}
+html:not(:has(#intro)) .site-header .icon-btn{color:var(--red)}
+/* every page (user 09/11): the light top melts down into the dark page, like the opening of the home page */
+html:not(:has(#intro)) body::before{content:"";position:absolute;inset:0 0 auto;height:min(620px,80vh);z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgb(140 170 169) 0%,rgb(136 167 166) 12%,rgb(72 102 101) 38%,rgb(30 52 51) 62%,rgb(14 26 25 / .6) 82%,rgb(12 23 22 / 0) 100%)}
+/* user 09/11: only the home page keeps a fixed top bar; on the other pages the name and icons sit at the top of the page,
+   on its light top, with no band, and scroll away with it */
+html:not(:has(#intro)) .site-header{position:absolute}
+html:not(:has(#intro)) .site-header::before{display:none}
+html:not(:has(#intro)) .site-header .logo{display:none}   /* user 09/11: the name in the top bar only on the home page */
+/* 24/11 (Chaim: "the menu at the top right should stay all the time"): on the other pages the menu button stays in its
+   corner while the page scrolls (the rest of the bar still scrolls away, as decided on 09/11). Once the light top has
+   gone by it gets a dark round backing, so it reads on any background */
+html:not(:has(#intro)) #open-menu{position:fixed;z-index:60;top:calc((var(--header-h) - 54px) / 2);inset-inline-start:clamp(16px,3vw,40px);border-radius:50%;
+  transition:background .3s,box-shadow .3s,color .3s}
+html:not(:has(#intro)) .site-header .hdr-left{margin-inline-start:auto}   /* the bar's other end keeps its place */
+html:not(:has(#intro)) .site-header.solid #open-menu{background:rgb(12 23 22 / .82);color:var(--teal-light);
+  box-shadow:0 0 0 1px rgb(172 196 195 / .18),0 8px 22px rgb(0 0 0 / .35)}
+/* menu icon: its two bars turn into an X while the menu is open; the menu's own X is gone (user 09/11) */
+#open-menu .mb{position:relative;display:block;width:30px;height:10px}
+#open-menu .mb i{position:absolute;right:0;height:1.7px;border-radius:1px;background:currentColor;transform-origin:50% 50%;
+  transition:top .32s cubic-bezier(.6,0,.2,1),width .32s cubic-bezier(.6,0,.2,1),right .32s,transform .32s cubic-bezier(.6,0,.2,1) .12s}
+#open-menu .mb i:first-child{top:0;width:30px}
+#open-menu .mb i:last-child{top:8.3px;width:18px}
+.menu-open #open-menu .mb i{top:4.15px;width:26px;right:2px}
+.menu-open #open-menu .mb i:first-child{transform:rotate(45deg)}
+.menu-open #open-menu .mb i:last-child{transform:rotate(-45deg)}
+/* the open menu shows in front of the top bar (user 17/11): the bar stays above the dimming so its X keeps its full brightness, and its own band and background step aside so they do not cut the menu's top edge */
+.menu-open .site-header{z-index:95}
+html.menu-open .site-header,html.menu-open .site-header.solid{background:transparent!important;backdrop-filter:none!important;border-bottom-color:transparent!important;transition:none}
+html.menu-open .site-header::before{opacity:0}
+/* phones (user 22/11, iPhone): the menu opens below the whole name, its English line included, and clear of the X's
+   round button; this replaces fading the English line out under the menu (19/11) */
+@media (max-width:759px){
+  #menu-overlay .popup.menu{top:calc(var(--header-h) + 14px);max-height:calc(100svh - var(--header-h) - 30px)}
+}
+/* the round hover shade only where there is a real mouse: on a phone the tap left it stuck around the X */
+@media (hover:none){.site-header .icon-btn:hover{background:transparent}}
+/* menu and cart (user 18/11): the page behind keeps its own brightness, only lightly blurred */
+#menu-overlay,#cart-overlay{background:transparent;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+#menu-overlay .popup.menu .close{display:none}
+/* pages other than home: no name in the top bar, so the page title sits higher (user 09/11) */
+html:not(:has(#intro)) .page-top{padding-top:calc(var(--header-h) - 6px)}
+/* video cards: just a red triangle, no box behind it (user 09/11) */
+.vcard .frame .play{background:none;border-radius:0;width:64px;height:64px;color:var(--red);filter:drop-shadow(0 2px 8px rgb(0 0 0 / .55))}
+.vcard:hover .frame .play{background:none;color:#c33a27;transform:scale(1.12)}
+.vcard .frame .play svg{width:46px;height:46px}
+.vcard .frame .cap{display:none}   /* no song-title caption over the video picture (user 09/11) */
+/* newsletter: hidden trap field that only bots fill */
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+/* the about text when even small type does not fit the two columns: no forced break, columns balance (home.js fitAbout) */
+@media (min-width:1100px){#intro .ia-about-end .txt.free p:nth-child(3){break-before:auto;-webkit-column-break-before:auto}}
+
+/* test mode badge (assets/js/app.js): shows the store is open for tests; only an indicator */
+.test-badge{position:fixed;z-index:90;inset-inline-start:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;
+  background:var(--red,#A83020);color:#fff;border:0;font:500 15px/1 var(--f-body,'IBM Plex Sans Hebrew',sans-serif);box-shadow:0 10px 30px -10px rgba(0,0,0,.6);cursor:default;pointer-events:none}
+.test-badge svg{width:18px;height:18px;flex:none}
+.test-badge:focus-visible{outline:2px solid #fff;outline-offset:3px}
+/* product page on phones: price options and the add-to-cart row centred (user 10/11) */
+@media (max-width:759px){.product .options,.product .buy-row{justify-content:center}}
+/* cart page on phones (user 10/11: "not adapted"): nothing wider than the screen, each line a compact two-row card */
+.cart-page > *{min-width:0}
+@media (max-width:600px){
+  .cart-table thead{display:none}
+  .cart-table,.cart-table tbody{display:block}
+  .cart-table tr{display:grid;grid-template-columns:56px minmax(0,1fr) auto;grid-template-areas:"img name rm" "img qty sum";gap:8px 12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+  .cart-table tr:last-child{border-bottom:0}
+  .cart-table td{padding:0;border:0}
+  .cart-table td:nth-child(1){grid-area:img}
+  .cart-table td:nth-child(2){grid-area:name;line-height:1.35}
+  .cart-table td:nth-child(4){grid-area:qty;justify-self:start}
+  .cart-table td:nth-child(5){grid-area:sum;justify-self:end;white-space:nowrap}
+  .cart-table td:nth-child(6){grid-area:rm;justify-self:end}
+  .cart-table td:nth-child(4) .qty-box{transform:none!important;transform-origin:right center}
+}
+/* very narrow phones (under 360): the quantity box takes its own row beside the sum, so it never sits on the price */
+@media (max-width:359px){.cart-table tr{grid-template-areas:"img name rm" "qty qty sum"}}
+
+/* Cardcom payment window over the cart (16/11): full screen on phones, a tall card on desktop */
+.pay-popup{width:min(520px,100%);height:min(820px,calc(100svh - 32px));padding:56px 12px 12px;display:grid}
+.pay-popup iframe{width:100%;height:100%;border:0;border-radius:14px;background:#fff}
+@media (max-width:599px),(max-height:600px){.pay-overlay{padding:0}.pay-popup{width:100%;height:100svh;border-radius:0;border:0;padding:56px 0 0}.pay-popup iframe{border-radius:0}}
+
+/* ---------- about page ---------- */
+.bio .wrap{display:grid;gap:clamp(48px,7vw,96px)}
+.bio-top .about-copy{gap:14px}
+.bio-lead{font-size:clamp(22px,2.4vw,32px);line-height:1.45;color:var(--ink);font-weight:400;text-wrap:balance}
+.bio-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px)}
+.bio-cols article{border-top:1px solid var(--line);padding-top:22px;display:grid;gap:12px;align-content:start;line-height:1.8}
+.bio-cols h2{font-size:22px;font-weight:500;color:var(--teal-light)}
+.bio-block{display:grid;gap:14px}
+.bio-block h2{font-size:clamp(36px,5vw,64px)}
+.bio-intro{max-width:70ch;line-height:1.8}
+.bio-works{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.bio-works li{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;display:grid;gap:4px;align-content:center;min-height:84px}
+.bio-works b{font-size:19px;font-weight:500;color:var(--ink)}
+.bio-works span{font-size:14px;color:var(--ink-dim)}
+.bio-hits{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.bio-hits li{border:1px solid var(--line);border-radius:var(--pill);padding:10px 22px;font-size:17px;color:var(--ink);display:flex;align-items:baseline;gap:10px}
+.bio-hits span{font-size:13px;color:var(--ink-dim)}
+.bio-end{display:grid;gap:22px;justify-items:center;text-align:center;padding:clamp(28px,5vw,56px)}
+.bio-end p{max-width:62ch;font-size:clamp(17px,1.5vw,20px);line-height:1.8;color:var(--ink)}
+@media (max-width:899px){.bio-cols{grid-template-columns:1fr}}
+@media (max-width:599px){.bio-works{grid-template-columns:1fr 1fr}.bio-works li{padding:14px 14px;min-height:72px}.bio-works b{font-size:17px}.bio-hits li{font-size:16px;padding:9px 16px}}
+/* home: the link from the short about text to the full page */
+.about-more{margin:0}
+.about-more a{color:var(--teal-light);font-weight:500;border-bottom:1px solid currentColor;padding-bottom:2px}
+/* inside the home ending the link can be pressed only once the text is on screen (home.js) */
+#intro .ia-about-end .about-more a{pointer-events:none}
+.about-more a:hover{color:#fff}
+.bio-top h1{font-size:clamp(56px,8vw,104px);margin-bottom:6px}
+
+/* search button: only on the home page and only at its top (user 17/11); app.js sets .search-on */
+#open-search{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility 0s .25s}
+.site-header.search-on #open-search{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .25s}
+
+/* phones (user 17/11): no grey flash on a tap, and no focus frame left around a button after it. Keyboard users on a computer keep the frame */
+html{-webkit-tap-highlight-color:transparent}
+@media (hover:none) and (pointer:coarse){*:focus-visible,.options input:focus-visible + span{outline:none!important}}
+
+/* a button that waits for the server shows a spinner in place of its label (user 17/11); set with aria-busy="true" */
+button[aria-busy="true"]{position:relative;color:transparent!important;pointer-events:none}
+button[aria-busy="true"]>*{visibility:hidden}
+button[aria-busy="true"]::before{content:"";position:absolute;inset:0;margin:auto;width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .7s linear infinite}
+@media (prefers-reduced-motion:reduce){.mo-on button[aria-busy="true"]::before{animation:spin .7s linear infinite!important}}
+
+/* computers (user 17/11): one row. The link list on the right, the terms link right after "contact" as one more link,
+   and the icons at the left end */
+@media (min-width:901px){
+  .footer-bar > div{display:flex;flex-wrap:wrap;align-items:center}
+  .footer-bar .footer-meta{display:contents}
+  .footer-bar .footer-meta .terms{padding:6px 10px 6px 0}
+  .footer-bar .footer-meta .terms::before{content:"|";color:var(--line);margin-inline-end:10px}
+  .footer-bar .footer-meta .terms:hover{color:var(--ink)}
+  .footer-bar .socials{margin-inline-start:auto}
+}
+
+/* the developer's form (user 17/11): its title is in the plain site font, not the brush one */
+#dev-title{font-family:var(--f-body);font-weight:500;font-size:clamp(22px,3vw,26px);line-height:1.3;color:var(--ink);padding-inline-start:44px}   /* room for the close button, which sits at the start side */
+/* user 17/11: the logo sits above the title; where the three fields fall to two columns the mail field takes the whole row */
+#dev-title{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+#dev-title img{display:block;flex:none;order:-1;height:41px;width:auto;align-self:center;position:relative;inset-inline-start:-22px}   /* centred in the window: the title leaves 44px for the close button, half of it is given back */
+@media (max-width:980px){#dev-form .grid-3 .field:last-child,#contact-form .grid-3 .field:last-child{grid-column:1/-1}}
+#dev-form .btn,#contact-form .btn{justify-self:end}   /* user 17/11: the send button at the left end */
+/* the developer's credit is his animated logo instead of his name (user 17/11) */
+.credits{align-items:center}
+.credits a{display:inline-flex;align-items:center;min-height:44px}
+.credits a img{display:block;height:21px;width:auto}
+/* after the developer's form (user 17/11): the "sent" title is in the plain site font too, not the artist's brush */
+#success-title.plain{font-family:var(--f-body);font-weight:500;font-size:clamp(22px,3vw,26px);line-height:1.3;color:var(--ink)}
+
+/* ---------- חלון ההשקה (assets/js/app.js: launchPopup) ---------- */
+/* launch popup */
+.popup.promo{width:min(760px,100%);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:clamp(20px,4vw,40px);align-items:center;padding:clamp(22px,4vw,40px);overflow:hidden}
+.popup.promo::before{content:"";position:absolute;inset:-40% 30% auto -20%;height:120%;background:radial-gradient(closest-side,rgba(172,196,195,.22),transparent);pointer-events:none}
+.popup.promo .close{z-index:3;inset-inline:auto 14px}
+.promo-art{position:relative;aspect-ratio:1;width:100%}
+.promo-art img{position:relative;z-index:1;width:80%;aspect-ratio:1;object-fit:cover;border-radius:10px;margin-inline-end:auto;display:block;box-shadow:0 30px 60px -18px rgba(0,0,0,.85),0 0 60px rgba(172,196,195,.2)}
+.promo-art .vinyl{position:absolute;top:8%;left:0;width:68%;aspect-ratio:1;height:auto;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, #0B1514 0 14%, #1A2C2B 14.5% 16%, #0B1514 16.5% 18%, #141F1E 18.5%, #0A1312 60%, #1A2C2B 61%, #0A1312 62% 100%);box-shadow:0 20px 50px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.06)}
+.promo-art .vinyl::after{content:"";position:absolute;inset:36%;border-radius:50%;background:var(--red)}
+.promo-art .badge{position:absolute;z-index:2;top:-5%;inset-inline-start:-4%;width:31%;aspect-ratio:1;border-radius:50%;background:var(--red);color:#fff;display:grid;place-content:center;text-align:center;font-size:clamp(12px,1.6vw,15px);line-height:1.1;box-shadow:0 12px 30px -8px rgba(0,0,0,.7)}
+.promo-art .badge b{display:block;font-family:var(--f-num);font-size:1.9em;font-weight:700;direction:ltr}
+.promo-copy{position:relative;display:grid;gap:12px;justify-items:start}
+.popup.promo h2{font-size:clamp(52px,8vw,84px);margin:0;line-height:.95}
+.promo-copy p{font-size:18px;color:var(--ink)}
+.promo-copy .price{font-size:30px}
+.promo-actions{display:flex;flex-wrap:nowrap;gap:10px;margin-top:6px;width:100%}
+.promo-actions .btn{flex:1 1 0;min-width:0;justify-content:center;white-space:nowrap;padding-inline:12px;font-size:15px}
+@media (max-width:360px){.promo-actions{gap:6px}.promo-actions .btn{font-size:13px;padding-inline:6px;gap:5px}}
+.promo-actions svg{width:18px;height:18px}
+.promo-actions .btn-trailer{flex:0 0 auto;padding-inline:18px 5px;gap:8px;font-size:14px}
+@media (max-width:360px){.promo-actions .btn-trailer{padding-inline:12px 4px;gap:6px;font-size:13px}.promo-actions .btn-trailer .ic{width:30px;height:30px}}
+/* entrance: cover drops in, the record slides out and keeps turning, the sticker pops, the copy follows */
+.promo-overlay[data-open="true"] .promo-art img{animation:promo-cover .7s cubic-bezier(.2,.9,.25,1.15) both,promo-float 6s ease-in-out .7s infinite}
+.promo-overlay[data-open="true"] .promo-art .vinyl{animation:promo-vinyl .9s cubic-bezier(.2,.8,.2,1) .25s both,spin 14s linear 1.15s infinite}
+.promo-overlay[data-open="true"] .promo-art .badge{animation:promo-pop .55s cubic-bezier(.3,1.6,.5,1) .65s both,promo-wiggle 4s ease-in-out 1.6s infinite}
+.promo-overlay[data-open="true"] .promo-copy>*{animation:promo-up .5s ease both}
+.promo-overlay[data-open="true"] .promo-copy>:nth-child(1){animation-delay:.3s}
+.promo-overlay[data-open="true"] .promo-copy>:nth-child(2){animation-delay:.4s}
+.promo-overlay[data-open="true"] .promo-copy>:nth-child(3){animation-delay:.5s}
+.promo-overlay[data-open="true"] .promo-copy>:nth-child(4){animation-delay:.6s}
+.promo-overlay[data-open="true"] .promo-copy>:nth-child(5){animation-delay:.7s}
+.promo-overlay[data-open="true"] .promo-actions .btn-red{animation:promo-glow 2.4s ease-in-out 1.4s infinite}
+@keyframes promo-cover{from{opacity:0;transform:translateY(-26px) rotate(-7deg) scale(.86)}to{opacity:1;transform:rotate(3deg)}}
+@keyframes promo-float{0%,100%{transform:rotate(3deg)}50%{transform:translateY(-7px) rotate(1.5deg)}}
+@keyframes promo-vinyl{from{opacity:0;transform:translateX(42%)}to{opacity:1;transform:none}}
+@keyframes promo-pop{from{opacity:0;transform:scale(.2) rotate(-40deg)}to{opacity:1;transform:rotate(-12deg)}}
+@keyframes promo-wiggle{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(-6deg) scale(1.06)}}
+@keyframes promo-up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes promo-glow{0%,100%{box-shadow:0 0 0 0 rgba(168,48,32,.55)}60%{box-shadow:0 0 0 14px rgba(168,48,32,0)}}
+@media (max-width:640px){
+  .popup.promo{grid-template-columns:1fr;text-align:center;gap:14px;max-height:calc(100svh - 32px);overflow:hidden auto}
+  .promo-art{width:min(62%,240px);margin-inline:auto}
+  .promo-copy{justify-items:center}
+  .promo-actions{justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){.promo-overlay .promo-art *,.promo-overlay .promo-copy>*,.promo-overlay .btn-red{animation:none!important}.promo-art img{transform:rotate(3deg)}.promo-art .badge{transform:rotate(-12deg)}}
+
+/* ---------- מצב קל למחשבים חלשים (assets/anim/lite.js שם html.lite) ----------
+   Only the costly finish is dropped; the album still turns its pages and Dudi still steps out. */
+.lite *,.lite *::before,.lite *::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.lite .overlay{background:rgba(5,11,11,.86)}
+.lite #intro .grain,.lite #intro .ia-sparks{display:none}
+.lite #intro .vign,.lite #intro .beam,.lite #intro .halo{-webkit-mask-image:none;mask-image:none}
+.lite #intro .cshadow{filter:none!important;box-shadow:0 0 22px 10px rgb(0 0 0 / .5);background:rgb(0 0 0 / .5)}
+.lite #intro .name{text-shadow:none}
+.lite .album-art .vinyl{animation:none}
+#contact-title{text-align:center}
+.dev-lead{text-align:center;font-size:18px;color:var(--ink);margin:0 0 16px}
+/* launch discount: the small label that stays in the corner after the launch window was closed (user 20/11) */
+.promo-chip{position:fixed;z-index:80;inset-inline-start:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 18px;border-radius:999px;background:var(--red);color:#fff;font-size:14px;font-weight:500;line-height:1;white-space:nowrap;box-shadow:0 14px 30px -10px rgba(0,0,0,.75);transition:transform .25s}
+.promo-chip b{font-family:var(--f-num);font-size:17px;font-weight:700;direction:ltr}
+.promo-chip svg{width:18px;height:18px;flex:none}
+.promo-chip.above{bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+@media (max-width:600px){.promo-chip{padding:0 16px}.promo-chip span{display:none}}
+.promo-chip:hover{transform:translateY(-2px)}
+.promo-chip:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.promo-chip{transition:none}}
+@media print{.promo-chip{display:none}}
+
+/* ---------- phones: polish pass (21/11) ---------- */
+@media (max-width:759px){
+  /* the brush letters swing past their own box; a little room on both sides keeps them off the screen edge */
+  .brush{padding-inline:.14em}
+  /* home, listen: the cover stack opens less and sits a touch to the side, so it stays inside its frame */
+  #intro .ia-side .fan{--fan-step:3deg;translate:-22px 0}
+}
+/* narrow phones (under 360px): the cover stack and the row of platforms fit inside the frame */
+@media (max-width:359px){
+  #intro .ia-side{padding-inline:14px}
+  #intro .ia-side .fan{width:min(250px,100%);translate:-16px 0}
+  #intro .ia-side .platforms,.platforms{gap:6px}
+  .platforms a{width:42px;height:42px}
+}
+
+/* ---------- קריאוּת (23/11, שדרוג "פי 10") ----------
+   הטקסט המשני באתר היה 12–13 פיקסלים במשקל דק (300) על רקע כהה — בדף המוזיקה 279 מתוך 283 קטעי הטקסט.
+   כאן הוא מוגדל ל-14.5 ומקבל משקל רגיל, כדי שייקרא בלי להתאמץ; הצבעים והמדרג (כותרת בהירה, פרטים עמומים) נשארים.
+   "html body" — כדי לגבור גם על הגדרות שכתובות בתוך הדפים עצמם (אלבומים, סינגלים). */
+html body .vcard .meta{font-size:14.5px;font-weight:400}
+html body .vcard .meta b{font-size:14px}
+html body .acard .role{font-size:14.5px;font-weight:400;line-height:1.55}
+html body .singles small{font-size:14.5px;font-weight:400;margin-top:2px}
+html body .footer-nav{font-size:15px}
+html body .footer-meta .terms{font-size:15px}
+html body .check{font-size:13.5px;font-weight:400}
+html body .credits{font-size:13px}
+html body .pcard .tag{font-size:12px}
+html body .digital{font-size:14px;letter-spacing:.18em}
+html body .sale-note{font-size:15px}
+html body .trailer-btn{font-size:14px}
+/* long Hebrew lines break evenly instead of leaving one word alone on the last line */
+h1,h2,h3,.brush{text-wrap:balance}
+p,.about-copy,.role,.desc{text-wrap:pretty}
+
+/* ---------- כפתורים צפים בטלפון (23/11) ----------
+   כפתור הנגישות וכפתור ה-10% ישבו על הכרטיסים והסתירו אותם. עכשיו, בגלילה למטה (קריאה) הם יוצאים בעדינות מהמסך,
+   ובגלילה קלה למעלה — או בראש הדף ובסופו — הם חוזרים. כפתור הנגישות גם צר יותר. app.js מסמן את המצב (html.fab-hide). */
+@media (max-width:759px){
+  html body .a11y-btn{width:36px;height:46px;transition:transform .38s cubic-bezier(.2,.8,.2,1),opacity .25s}
+  html body .promo-chip,html body .test-badge,html body .to-top{transition:transform .38s cubic-bezier(.2,.8,.2,1),opacity .25s}
+  html.fab-hide body .a11y-btn:not([aria-expanded="true"]){transform:translate(-110%,-50%);opacity:0;pointer-events:none}
+  /* "back to top" too: it is wanted when the visitor turns back up, which is exactly when it shows again */
+  html.fab-hide body .promo-chip,html.fab-hide body .test-badge,html.fab-hide body .to-top{transform:translateY(calc(100% + 28px));opacity:0;pointer-events:none}
+}
+@media (max-width:759px) and (prefers-reduced-motion:reduce){
+  html body .a11y-btn,html body .promo-chip,html body .test-badge,html body .to-top{transition:opacity .2s}
+  html.fab-hide body .a11y-btn:not([aria-expanded="true"]),html.fab-hide body .promo-chip,html.fab-hide body .test-badge,html.fab-hide body .to-top{transform:none}
+  html.fab-hide body .a11y-btn:not([aria-expanded="true"]){transform:translateY(-50%)}
+}
+
+/* ---------- מעבר חלק בין דפים (23/11) ----------
+   במקום החלפה חדה בכל מעבר: הדף הישן נמוג אל החדש. מה שזהה בשניהם (סרגל הראש, הרקע) נשאר יציב, ורק התוכן מתחלף.
+   עמעום של הדף כולו ולא החלקה של חלקים: סרגל הראש נבנה לפעמים רגע אחרי הציור הראשון של הדף, וחלק שזז היה נראה
+   קופץ. עובד בכרום, אדג' וספארי החדשים; בדפדפן אחר המעבר רגיל, כמו קודם. */
+@view-transition{navigation:auto}
+/* the same length and curve for both, so where the two pages are identical the sum stays whole and nothing dims */
+::view-transition-old(root){animation:dk-vt-out .36s cubic-bezier(.4,0,.2,1) both}
+::view-transition-new(root){animation:dk-vt-in .36s cubic-bezier(.4,0,.2,1) both}
+@keyframes dk-vt-out{to{opacity:0}}
+@keyframes dk-vt-in{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
+}
+
+/* ===== חלונית החנות בדף הבית עם מוצר אחד (24/11, חיים: "משהו שם בלי פרופורציה") =====
+   היה: רשת של שתי עמודות עם מוצר אחד, כך שהכרטיס תפס חצי חלונית והחצי השני נשאר ריק.
+   עכשיו: מוצר יחיד הוא כרטיס רחב אחד — העטיפה בצד, ולידה השם, המחיר וכפתור הסל. כשיהיו כמה מוצרים — הרשת הרגילה. */
+#intro #shop .grid:has(> .pcard:only-child){display:block}
+#intro #shop .pcard:only-child{display:grid;grid-template-columns:minmax(118px,42%) minmax(0,1fr);grid-template-rows:1fr auto;column-gap:18px;row-gap:12px;
+  align-items:end;padding:14px;backdrop-filter:none}
+#intro #shop .pcard:only-child .thumb{grid-row:1 / span 2;align-self:center}
+#intro #shop .pcard:only-child h3{font-size:clamp(17px,1.5vw,20px);font-weight:500;color:var(--ink);line-height:1.35;text-wrap:balance}
+#intro #shop .pcard:only-child .foot{align-self:start;margin:0;gap:12px}
+#intro #shop .pcard:only-child .price{font-size:clamp(20px,1.8vw,24px)}
+#intro #shop .grid:has(> .pcard:only-child) + .btn{justify-self:stretch;text-align:center;justify-content:center}
+@media (max-width:400px){
+  #intro #shop .pcard:only-child{grid-template-columns:1fr;grid-template-rows:auto;max-width:300px;margin-inline:auto;text-align:center}
+  #intro #shop .pcard:only-child .thumb{grid-row:auto}
+  #intro #shop .pcard:only-child .foot{justify-content:space-between}
+}

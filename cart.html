@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<script src="assets/js/noframe.js?v=1117a"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>סל קניות | דודי קאליש</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0C1716">
+<link rel="icon" href="favicon.ico" sizes="48x48"><link rel="icon" href="icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@200;300;400;500;600;700&family=Abril+Fatface&display=swap">
+<script src="assets/js/a11y.js?v=1120b"></script>
+<link rel="stylesheet" href="assets/css/style.css?v=1124g">
+<link rel="stylesheet" href="assets/css/motion.css?v=1117a">
+<script src="assets/js/motion.js?v=1109e"></script>
+<script defer src="assets/vendor/gsap.min.js?v=3125"></script><script defer src="assets/vendor/ScrollTrigger.min.js?v=3125"></script><script defer src="assets/vendor/lenis.min.js?v=1113"></script><script defer src="assets/js/flow.js?v=1122a"></script>
+</head>
+<body>
+<main class="section page-top">
+  <div class="wrap">
+    <h1 class="brush title center" style="margin-bottom:28px">סל קניות</h1>
+    <div class="cart-page">
+      <div class="panel" id="cart-panel"></div>
+      <aside class="panel" id="checkout">
+        <h2 class="brush">סך הכל</h2>
+        <div class="sum-row"><span>סכום ביניים</span><span id="sum-sub">0 ₪</span></div>
+        <div class="sum-row total"><span>סה"כ</span><span id="sum-total">0 ₪</span></div>
+        <form class="form" id="checkout-form" style="margin-top:18px" novalidate>
+          <div class="grid grid-2" style="gap:10px">
+            <div class="field"><label class="sr" for="co-fname">שם פרטי</label><input id="co-fname" name="fname" placeholder="שם פרטי *" required autocomplete="given-name"></div>
+            <div class="field"><label class="sr" for="co-lname">שם משפחה</label><input id="co-lname" name="lname" placeholder="שם משפחה *" required autocomplete="family-name"></div>
+          </div>
+          <div class="field"><label class="sr" for="co-phone">טלפון</label><input id="co-phone" name="phone" type="tel" placeholder="טלפון" autocomplete="tel"></div>
+          <div class="field"><label class="sr" for="co-email">אימייל</label><input id="co-email" name="email" type="text" inputmode="email" autocapitalize="off" spellcheck="false" data-email dir="ltr" pattern="[^ @]+@[^ @]+[.][^ @]{2,}" placeholder="כתובת אימייל * (לשם יישלח הקובץ)" required autocomplete="email"></div>
+          <label class="check"><input type="checkbox" name="terms" required><span>קראתי ואני מסכים/ה ל<a href='terms.html'>תנאי השימוש</a></span></label>
+          <label class="check"><input type="checkbox" name="newsletter"><span>אשמח לקבל עדכונים על שירים חדשים והופעות</span></label>
+          <div class="form-msg" aria-live="polite"></div>
+          <button class="btn btn-red btn-lg" type="submit" style="justify-self:stretch" data-cart-disabled>תשלום מאובטח</button>
+          <p class="pay-note">התשלום מתבצע בדף מאובטח של קארדקום. הקבצים נשלחים למייל מיד לאחר אישור התשלום.</p>
+        </form>
+      </aside>
+    </div>
+  </div>
+</main>
+<script src="assets/js/icons.js?v=1124a"></script>
+<script src="assets/js/email.js?v=1118a"></script>
+<script src="assets/js/app.js?v=1124d"></script>
+<script src="assets/js/cart.js?v=1120c"></script>
+</body>
+</html>

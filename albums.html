@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>אלבומים | דודי קאליש</title>
+<meta name="description" content="הדיסקוגרפיה של דודי קאליש: אלבומים משלושה עשורים של יצירה.">
+<link rel="canonical" href="https://dudikalish.com/albums.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="דודי קאליש">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="אלבומים | דודי קאליש">
+<meta property="og:description" content="הדיסקוגרפיה של דודי קאליש: אלבומים משלושה עשורים של יצירה.">
+<meta property="og:url" content="https://dudikalish.com/albums.html">
+<meta property="og:image" content="https://dudikalish.com/assets/img/share.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0C1716">
+<link rel="icon" href="favicon.ico" sizes="48x48"><link rel="icon" href="icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@200;300;400;500;600;700&family=Abril+Fatface&display=swap">
+<script src="assets/js/a11y.js?v=1120b"></script>
+<link rel="stylesheet" href="assets/css/style.css?v=1124x">
+<link rel="stylesheet" href="assets/css/motion.css?v=1117a">
+<script src="assets/js/motion.js?v=1109e"></script>
+<script defer src="assets/vendor/gsap.min.js?v=3125"></script><script defer src="assets/vendor/ScrollTrigger.min.js?v=3125"></script><script defer src="assets/vendor/lenis.min.js?v=1113"></script><script defer src="assets/js/flow.js?v=1123p"></script>
+<style>
+  /* 23/11: no live blur behind the cards (it was recomputed on every scrolled frame) */
+  .acard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;gap:10px;transition:transform .25s,border-color .25s}
+  /* 23/11 (אבן 8): a whole album plays in the fixed player, from a button on its cover */
+  .acard .a-play{position:absolute;z-index:2;inset-inline-end:12px;bottom:12px;width:56px;height:56px;border-radius:50%;border:0;padding:0;display:grid;place-items:center;
+    background:var(--red);color:#fff;cursor:pointer;box-shadow:0 14px 30px -10px rgb(2 8 8 / .8);opacity:0;transform:translateY(8px) scale(.92);
+    transition:opacity .25s,transform .35s cubic-bezier(.2,.8,.2,1),filter .2s}
+  .acard .a-play svg{width:24px;height:24px}
+  .acard .a-play .i-play{translate:2px 0}   /* the triangle looks centred only when nudged towards its point */
+  .acard .a-play .i-pause{display:none}
+  .acard:hover .a-play,.acard .a-play:focus-visible,.acard.is-on .a-play{opacity:1;transform:none}
+  .acard .a-play:hover{filter:brightness(1.12)}
+  .acard .a-play:active{transform:scale(.94)}
+  .acard.is-playing .a-play .i-play{display:none}
+  .acard.is-playing .a-play .i-pause{display:block}
+  .acard .a-eq{position:absolute;z-index:2;top:10px;inset-inline-start:10px;display:none;align-items:center;gap:8px;padding:6px 11px;border-radius:999px;background:rgb(8 14 14 / .8);color:#fff;font-size:13px;font-weight:500}
+  .acard .a-eq .dkp-eq{color:var(--red)}
+  .acard.is-on .a-eq{display:inline-flex}
+  .acard:not(.is-playing) .a-eq .dkp-eq i{animation-play-state:paused}
+  .acard.is-on{border-color:rgb(168 48 32 / .6)}
+  /* touch screens: always shown, smaller on the small covers, with a finger-sized hit area around it */
+  @media (hover:none){.acard .a-play{opacity:1;transform:none;width:40px;height:40px;inset-inline-end:8px;bottom:8px}.acard .a-play svg{width:17px;height:17px}
+    .acard .a-play::before{content:"";position:absolute;inset:-6px;border-radius:50%}}
+  @media (prefers-reduced-motion:reduce){.acard .a-play{transition:opacity .2s}}
+  .tracks-pop [hidden]{display:none!important}
+  .tracks-pop ol{scrollbar-width:thin;scrollbar-color:rgb(172 196 195 / .25) transparent}
+  .tracks-pop .tp-all{align-self:flex-start;margin:0 0 14px;gap:8px}
+  .tracks-pop .tp-all svg{width:18px;height:18px}
+  .tracks-pop li button[data-dkp-now]{outline:none;background:rgb(168 48 32 / .16);color:var(--ink)}
+  .tracks-pop li button[data-dkp-now] .n{color:var(--red)}
+  .acard:hover{transform:translateY(-4px);border-color:rgba(172,196,195,.4)}
+  .acard .art{aspect-ratio:1;border-radius:var(--radius-sm);overflow:hidden;position:relative;background:linear-gradient(145deg,var(--bg-3),var(--bg));display:grid;place-items:center}
+  .acard .art img{width:100%;height:100%;object-fit:cover}
+  .acard .art .yr{position:absolute;top:8px;inset-inline-start:10px;font-family:var(--f-num);font-size:44px;line-height:1;color:var(--teal);opacity:.55}
+  .acard .art .ttl{font-family:var(--f-brush);font-size:clamp(30px,3vw,40px);color:var(--red);text-align:center;padding:16px;line-height:1.1}
+  .acard h3{font-size:18px;font-weight:500;color:var(--ink);line-height:1.3}
+  .acard .role{font-size:13px;color:var(--ink-dim);line-height:1.5}
+  /* album songs: the album's videos in one list instead of loose cards on the music page (user 16/11) */
+  .tracks-pop{width:min(480px,100%);max-height:calc(100svh - 32px);display:flex;flex-direction:column}
+  .tracks-pop h2{font-size:clamp(36px,5vw,52px);margin-bottom:12px;padding-inline-start:40px}
+  .tracks-pop ol{list-style:none;margin:0;padding:0;overflow:auto;display:grid;gap:2px}
+  .tracks-pop li button{width:100%;min-height:48px;display:flex;align-items:center;gap:12px;padding:8px 10px;border:0;border-radius:var(--radius-sm);background:none;color:var(--ink-soft);font:inherit;font-size:16px;text-align:start;cursor:pointer;transition:background .2s,color .2s}
+  .tracks-pop li button:hover,.tracks-pop li button:focus-visible{background:rgba(172,196,195,.08);color:var(--ink)}
+  .tracks-pop .n{font-family:var(--f-num);font-size:14px;color:var(--teal);min-width:22px}
+  .tracks-pop .t{flex:1}
+  .tracks-pop li svg{width:16px;height:16px;color:var(--red);flex:none}
+  .acard .links{display:flex;gap:6px;margin-top:auto;flex-wrap:nowrap;justify-content:center}   /* always one row (user 10/11) */
+  .acard .links a{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:7px 12px;border-radius:var(--pill);border:1px solid var(--line);color:var(--ink-soft)}
+  .acard .links a:hover{border-color:var(--teal-light);color:var(--ink)}
+  .acard .links .trailer-btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:13px;padding:7px 12px;border-radius:var(--pill);border:1px solid var(--line);background:none;color:var(--ink-soft);cursor:pointer}
+  .acard .links .trailer-btn:hover{border-color:var(--teal-light);color:var(--ink)}
+  .acard .links .trailer-btn svg{width:14px;height:14px}
+  @media (max-width:560px){   /* phones: trailer + buy show as round icons only (user 12/11) */
+    .acard .links .lbl{display:none}
+    .acard .links .trailer-btn,.acard .links a.shop-btn{width:44px;height:44px;padding:0;justify-content:center;border-radius:50%}
+    .acard .links .trailer-btn svg,.acard .links a.shop-btn svg{width:18px;height:18px}
+  }
+  .acard .links svg{width:16px;height:16px}
+  .acard .links a.ico{flex:0 1 48px;min-width:0;width:48px;height:auto;aspect-ratio:1;padding:0;justify-content:center}
+  .acard .links a.ico svg{width:54%;height:54%}
+  .acard .links a.ico[aria-label="24six"] svg,.acard .links a.ico[aria-label="Zing"] svg{width:84%;height:84%}
+  .acard.highlight{border-color:var(--red)}
+  /* the newest album gets a row of its own, bigger than the rest (user 16/11) */
+  .acard .body{display:contents}
+  .acard.feature{grid-column:1/-1;flex-direction:row;align-items:center;gap:clamp(20px,4vw,56px);padding:clamp(16px,2.4vw,30px);background:linear-gradient(120deg,rgba(168,48,32,.14),var(--card) 55%)}
+  .acard.feature .art{flex:0 0 min(360px,36%);box-shadow:0 30px 60px -28px rgba(0,0,0,.85)}
+  .acard.feature .body{display:flex;flex:1;min-width:0;flex-direction:column;gap:14px;align-items:flex-start}
+  .acard.feature h3{font-family:var(--f-brush);font-weight:400;font-size:clamp(52px,7vw,96px);line-height:1;color:var(--red)}
+  .acard.feature .role{font-size:clamp(15px,1.4vw,18px);color:var(--ink-soft);line-height:1.6}
+  .acard.feature .links{margin-top:10px;justify-content:flex-start;gap:12px;flex-wrap:wrap}
+  .acard.feature .links a.shop-btn,.acard.feature .links .trailer-btn{font-size:16px;min-height:50px;padding:12px 26px;gap:8px}
+  .acard.feature .links a.shop-btn{background:var(--red);border-color:var(--red);color:#fff}
+  .acard.feature .links a.shop-btn:hover{filter:brightness(1.1);color:#fff}
+  .acard.feature .links svg{width:18px;height:18px}
+  /* no frame around it (user 16/11): the cover and the title stand on the page itself */
+  .acard.feature{border-color:transparent;background:none;backdrop-filter:none;padding-inline:0}
+  .mo-on .acard.feature::after{display:none}
+  .mo-on .acard.feature:hover{transform:none;box-shadow:none}
+  @media (max-width:700px){
+    .acard.feature{flex-direction:column;align-items:stretch;gap:16px}
+    .acard.feature .art{flex:none;width:100%}
+    .acard.feature .body{align-items:center;text-align:center}
+    .acard.feature .links{justify-content:center}
+    .acard.feature .links .lbl{display:inline}
+    .acard.feature .links .trailer-btn,.acard.feature .links a.shop-btn{width:auto;height:auto;border-radius:var(--pill);padding:12px 24px}
+  }
+  @media (max-width:560px){.acard .links{gap:4px;margin-inline:-6px}.acard .links a.ico{min-height:0}}   /* five services stay one row of round icons on phones */
+  @media (max-width:560px){   /* phones: plain icons, no rings around them (user 16/11); the songs button sits in the row like the rest */
+    .acard:not(.feature) .links a.ico,.acard:not(.feature) .links .trailer-btn{border-color:transparent}
+    .acard:not(.feature) .links .trailer-btn{flex:0 1 48px;min-width:22px;width:auto}
+  }
+</style>
+</head>
+<body>
+<main class="section page-top">
+  <div class="wrap">
+    <h1 class="brush title center" style="margin-bottom:28px">אלבומים</h1>
+    <div class="grid grid-4" id="albums-grid"></div>
+  </div>
+</main>
+<script src="assets/js/icons.js?v=1124a"></script>
+<script src="assets/js/email.js?v=1118a"></script>
+<script src="assets/js/app.js?v=1124x"></script>
+<script defer src="assets/js/player.js?v=1123v"></script>
+<script>
+loadJSON("albums").catch(() => {});   // asked for right away, together with the rest of the page
+document.addEventListener("chrome:ready", async () => {
+  const all = await loadJSON("albums");
+  // the featured album first, then newest to oldest (an album without a year goes last), whatever order they were added in
+  const d = { ...all, items: [...all.items].sort((a, b) => (!!b.highlight - !!a.highlight) || ((Number(b.year) || 0) - (Number(a.year) || 0))) };
+  // text that is edited in the admin is always printed as text, never as markup
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const LIST = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15V6M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM12 12H3M16 6H3M12 18H3"/></svg>';   // lucide list-music
+  const label = { "24six": "24six", "apple-music": "Apple Music", "spotify": "Spotify", "youtube": "YouTube", "zing": "Zing", "shop": "לרכישה" };
+  // an album's playable songs, in its own order (only real YouTube ids reach the page)
+  const vidsOf = (a) => (a.videos || []).filter(v => /^[\w-]{11}$/.test(v.youtube));
+  const idsOf = new Map(d.items.map(a => [a.id, vidsOf(a).map(v => v.youtube)]));
+  const PLAY = '<svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>';
+  const PAUSE = '<svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4.5" width="4.2" height="15" rx="1.2"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.2"/></svg>';
+  const playBtn = (a) => idsOf.get(a.id).length ? `<button type="button" class="a-play" data-album="${esc(a.id)}" aria-label="ניגון האלבום ${esc(a.title)}">${PLAY}${PAUSE}</button><span class="a-eq" aria-hidden="true"><span class="dkp-eq"><i></i><i></i><i></i></span><span class="a-eq-t">מתנגן</span></span>` : "";
+  $("#albums-grid").innerHTML = d.items.map((a, i) => `
+    <article id="a-${a.id}" class="acard reveal ${a.highlight ? "highlight feature" : ""}">
+      <div class="art">${a.cover ? `<img src="${esc(a.cover)}"${coverSet(a.cover, a.highlight)} alt="${esc(a.title)}" width="360" height="360" decoding="async" ${i < 4 ? 'fetchpriority="high"' : 'loading="lazy"'}>` : `<span class="yr">${esc(a.year)}</span><span class="ttl">${esc(a.title)}</span>`}${playBtn(a)}</div>
+      <div class="body"><h3>${esc(a.title)}</h3>
+      <div class="role">${esc([a.year, a.tracks ? `${a.tracks} רצועות` : ""].filter(Boolean).join(" · "))}<br>${esc([a.role, a.with ? `עם ${a.with}` : ""].filter(Boolean).join(" · "))}</div>
+      <div class="links">${a.videos?.length ? `<button type="button" class="trailer-btn songs-btn" data-album="${a.id}" aria-label="שירי האלבום" title="שירי האלבום">${LIST}<span class="lbl">שירים</span></button>` : ""}${a.links?.shop && SITE.album.trailer && a.links.shop.includes(SITE.album.id) ? `<button type="button" class="trailer-btn" aria-label="תקציר האלבום" title="תקציר האלבום">${UI.play}<span class="lbl">תקציר</span></button>` : ""}${Object.entries(a.links || {}).filter(([, u]) => u).map(([k, u]) => `<a href="${esc(u)}" ${k === "shop" ? `class="shop-btn" aria-label="${label[k]}" title="${label[k]}"` :`target="_blank" rel="noopener" class="ico" aria-label="${label[k] || k}" title="${label[k] || k}"`}>${k === "shop" ? ICON("cart") + `<span class="lbl">${label[k] || k}</span>` :(ICON(k) || label[k] || k)}</a>`).join("")}</div>
+      </div>
+    </article>`).join("");
+  $$(".trailer-btn:not(.songs-btn)").forEach(b => b.onclick = () => playVideo(SITE.album.trailer));   // album trailer, same video as on the album page
+  // album songs: a list of the album's videos, each one plays in the site's video player (user 16/11)
+  document.body.insertAdjacentHTML("beforeend", `<div class="overlay" id="tracks-overlay" data-open="false"><div class="popup tracks-pop" role="dialog" aria-modal="true" aria-labelledby="tracks-title"><button class="icon-btn close" type="button" aria-label="סגירה">${UI.x}</button><h2 class="brush" id="tracks-title"></h2><button type="button" class="btn btn-red tp-all" id="tracks-all">${PLAY}<span>נגן את כל האלבום</span></button><ol id="tracks-list"></ol></div></div>`);
+  const tOv = $("#tracks-overlay");
+  tOv.querySelector(".close").onclick = closeAll;
+  tOv.addEventListener("click", e => { if (e.target === tOv) closeAll(); });
+
+  /* 23/11 (אבן 8): the album plays as one queue in the fixed player — next/previous move inside the album.
+     The cover button of the album that plays pauses and resumes it; the card shows "מתנגן" while it plays. */
+  const P = () => window.DK_PLAYER;
+  const playAlbum = (id, start) => {
+    const ids = idsOf.get(id); if (!ids || !ids.length) return;
+    if (!P()) { playVideo(start || ids[0]); return; }   // no fixed player on this page: the old video window
+    P().play(start || ids[0], ids);
+  };
+  let openAlbum = null;
+  $("#tracks-all").onclick = () => { closeAll(); playAlbum(openAlbum); };
+  $("#tracks-list").onclick = e => { const b = e.target.closest("[data-yt]"); if (!b) return; closeAll(); playAlbum(openAlbum, b.dataset.yt); };
+  $$(".a-play").forEach(b => b.onclick = (e) => {
+    e.preventDefault(); e.stopPropagation();
+    const ids = idsOf.get(b.dataset.album), st = P() && P().now && P().now();
+    if (st && st.id && ids.includes(st.id) && P().toggle) P().toggle();   // this album is on: pause / resume it
+    else playAlbum(b.dataset.album);
+  });
+  const titleOf = new Map(d.items.map(a => [a.id, a.title]));
+  const paint = (st) => {
+    $$(".a-play").forEach(b => {
+      const ids = idsOf.get(b.dataset.album), on = !!(st && st.id && ids.includes(st.id)), pl = on && st.playing;
+      const card = b.closest(".acard");
+      card.classList.toggle("is-on", on); card.classList.toggle("is-playing", pl);
+      b.setAttribute("aria-label", `${pl ? "השהיית" : on ? "המשך ניגון" : "ניגון"} האלבום ${titleOf.get(b.dataset.album)}`);
+      card.querySelector(".a-eq-t").textContent = pl ? "מתנגן" : "בהשהיה";
+    });
+  };
+  addEventListener("dkp:now", e => paint(e.detail));
+  if (P() && P().now) paint(P().now());
+  // keyboard: when the list closes (button, backdrop or Escape) focus goes back to the album's songs button
+  let opener = null;
+  new MutationObserver(() => { if (tOv.dataset.open === "false" && opener && $("#lightbox").dataset.open !== "true") { opener.focus(); opener = null; } }).observe(tOv, { attributes: true, attributeFilter: ["data-open"] });
+  $$(".songs-btn").forEach(b => b.onclick = () => {
+    const a = d.items.find(x => x.id === b.dataset.album);
+    opener = b; openAlbum = a.id;
+    $("#tracks-title").textContent = a.title;
+    const vids = vidsOf(a);
+    $("#tracks-all").hidden = vids.length < 2;
+    $("#tracks-list").innerHTML = vids.map((v, i) => `<li><button type="button" data-yt="${v.youtube}"><span class="n">${i + 1}</span><span class="t"></span>${UI.play}</button></li>`).join("");
+    $$("#tracks-list .t").forEach((t, i) => t.textContent = vids[i].title);
+    openOverlay("tracks-overlay");
+    $("#tracks-list button")?.focus();
+  });
+  revealAll();
+  // arriving from the search (albums.html#a-<album>): the page goes to that album and lights its frame for a moment
+  const toAlbum = () => {
+    let t = null; try { t = location.hash.startsWith("#a-") && document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch {}
+    if (!t) return;
+    const reach = () => { if (window.lenis) window.lenis.scrollTo(t, { offset: -90 }); else t.scrollIntoView({ block: "center" }); };
+    const seen = () => { const r = t.getBoundingClientRect(); return r.top >= 0 && r.top < innerHeight * .7; };
+    // the page is still settling when it opens: go there, and go again if the first try was swallowed
+    setTimeout(() => { if (!seen()) { reach(); setTimeout(() => { if (!seen()) t.scrollIntoView({ block: "center" }); }, 1600); } }, 900);
+    setTimeout(() => {
+      reach();
+      t.animate?.([{ borderColor: "var(--teal-light)", boxShadow: "0 0 0 3px rgba(172,196,195,.35)" }, { borderColor: "var(--line)", boxShadow: "0 0 0 0 rgba(172,196,195,0)" }], { duration: 1800, easing: "ease-out" });
+    }, 350);
+  };
+  toAlbum(); addEventListener("hashchange", toAlbum);
+});
+</script>
+</body>
+</html>

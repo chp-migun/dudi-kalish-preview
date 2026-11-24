@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>חנות | דודי קאליש</title>
+<meta name="description" content="האלבום קול דודי לרכישה והורדה.">
+<link rel="canonical" href="https://dudikalish.com/shop.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="דודי קאליש">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="חנות | דודי קאליש">
+<meta property="og:description" content="האלבום קול דודי לרכישה והורדה.">
+<meta property="og:url" content="https://dudikalish.com/shop.html">
+<meta property="og:image" content="https://dudikalish.com/assets/img/album-share.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0C1716">
+<link rel="icon" href="favicon.ico" sizes="48x48"><link rel="icon" href="icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@200;300;400;500;600;700&family=Abril+Fatface&display=swap">
+<script src="assets/js/a11y.js?v=1120b"></script>
+<link rel="stylesheet" href="assets/css/style.css?v=1124x">
+<link rel="stylesheet" href="assets/css/motion.css?v=1117a">
+<script src="assets/js/motion.js?v=1109e"></script>
+<script defer src="assets/vendor/gsap.min.js?v=3125"></script><script defer src="assets/vendor/ScrollTrigger.min.js?v=3125"></script><script defer src="assets/vendor/lenis.min.js?v=1113"></script><script defer src="assets/js/flow.js?v=1123p"></script>
+<style>
+  /* חנות מחדש (23/11): המוצר המודגש בגדול, שאר המוצרים ברשת מתחתיו */
+  .shop-page [hidden]{display:none!important}
+  .sp{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(30px,6vw,88px);align-items:start;max-width:1120px;margin:0 auto clamp(56px,8vw,100px)}
+  .sp-art{position:relative;padding-inline-end:clamp(40px,7%,80px);position:sticky;top:calc(var(--header-h) + 24px)}
+  .sp-cover{position:relative;z-index:1;display:block;border-radius:14px;overflow:hidden;aspect-ratio:1;
+    box-shadow:0 40px 90px rgb(2 8 8 / .6),0 0 0 1px rgb(255 255 255 / .06);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+  .sp-cover img{width:100%;height:100%;object-fit:cover;display:block}
+  /* the record peeking out of the sleeve, and sliding a little further out on hover */
+  .sp-vinyl{position:absolute;z-index:0;top:4%;bottom:4%;aspect-ratio:1;inset-inline-end:0;border-radius:50%;
+    background:radial-gradient(circle,var(--red) 0 15%,#1a1a1a 15.5% 16.5%,transparent 17%),
+      repeating-radial-gradient(circle,#141a19 0 2px,#232b2a 2px 4px);
+    box-shadow:0 20px 50px rgb(0 0 0 / .55),0 0 0 1px rgb(172 196 195 / .22),inset 0 0 0 6px rgb(8 12 12 / .9);transition:translate .7s cubic-bezier(.2,.8,.2,1)}
+  .sp-vinyl::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 30deg,transparent 0 12%,rgb(255 255 255 / .09) 16%,transparent 22% 60%,rgb(255 255 255 / .06) 64%,transparent 70%)}
+  .sp-art:hover .sp-vinyl{translate:-14px 0}
+  .sp-art:hover .sp-cover{transform:translateY(-4px)}
+  .sp-eyebrow{font-size:14px;letter-spacing:.28em;color:var(--teal-light);font-weight:500}
+  .sp-title{font-family:var(--f-brush);font-weight:700;color:var(--red);font-size:clamp(56px,7vw,104px);line-height:.95;margin:.12em 0 .3em}
+  .sp-desc{font-size:clamp(16px,1.3vw,18px);line-height:1.75;color:var(--ink-soft);font-weight:400;margin:0 0 10px;max-width:46ch}
+  .sp-buy{margin:26px 0 30px;padding:22px 0;border-block:1px solid var(--line)}
+  .sp-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 14px}
+  .sp-price b{font-family:var(--f-num);font-weight:400;font-size:clamp(40px,4.4vw,56px);line-height:1;color:var(--ink);direction:ltr}
+  .sp-price s{color:var(--ink-dim);font-size:20px;direction:ltr}
+  .sp-sale{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;border-radius:999px;background:rgb(168 48 32 / .2);color:#f0b3a8;font-size:14px;font-weight:500}
+  .sp-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+  .sp-actions .btn svg{width:20px;height:20px}
+  .sp-note{display:flex;gap:10px;align-items:flex-start;margin:16px 0 0;font-size:14.5px;color:var(--ink-soft);font-weight:400;line-height:1.6}
+  .sp-note svg{width:18px;height:18px;flex:none;margin-top:3px;color:var(--teal-light)}
+  .sp-soon{font-size:18px;color:var(--ink-dim)}
+  .sp-th{font-size:14px;letter-spacing:.2em;color:var(--teal-light);font-weight:500;margin-bottom:12px}
+  .sp-tracks ol{list-style:none;margin:0;padding:0;columns:2;column-gap:28px}
+  .sp-tracks li{display:flex;gap:12px;align-items:baseline;padding:7px 0;border-bottom:1px solid rgb(172 196 195 / .1);break-inside:avoid;font-size:15.5px;color:var(--ink);font-weight:400}
+  .sp-tracks li b{font-family:var(--f-num);font-weight:400;color:var(--red);font-size:15px;min-width:22px}
+  .sp-more{display:inline-block;margin-top:24px;color:var(--teal-light);text-decoration:underline;text-underline-offset:4px;font-size:15px}
+  .sp-more:hover{color:var(--ink)}
+  @media (max-width:860px){
+    .sp{grid-template-columns:1fr;gap:34px}
+    .sp-art{position:relative;top:auto;width:min(420px,86%);margin-inline:auto}
+    .sp-info{text-align:center}
+    .sp-desc{margin-inline:auto}
+    .sp-price,.sp-actions{justify-content:center}
+    .sp-note{justify-content:center;text-align:start}
+    .sp-tracks{text-align:start}
+  }
+  @media (max-width:420px){.sp-tracks ol{columns:1}.sp-actions .btn{flex:1 1 100%;justify-content:center}}
+  @media (prefers-reduced-motion:reduce){.sp-cover,.sp-vinyl{transition:none}}
+</style>
+</head>
+<body>
+<main class="section page-top shop-page">
+  <div class="wrap">
+    <h1 class="brush title center" style="margin-bottom:28px">חנות</h1>
+    <section class="sp reveal" id="shop-spot" aria-label="המוצר המודגש" hidden></section>
+    <section class="shop-more" id="shop-more" hidden>
+      <div class="filters" id="filters" role="group" aria-label="סינון"></div>
+      <div class="grid grid-4" id="shop-grid"></div>
+    </section>
+  </div>
+</main>
+<script src="assets/js/icons.js?v=1124a"></script>
+<script src="assets/js/email.js?v=1118a"></script>
+<script src="assets/js/app.js?v=1124x"></script>
+<script defer src="assets/js/player.js?v=1123v"></script>
+<script src="assets/js/home.js?v=1123p"></script>
+<script src="assets/js/shop.js?v=1123h"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>סינגלים וקליפים | דודי קאליש</title>
+<meta name="description" content="הסינגלים והקליפים של דודי קאליש, עם קישורים להאזנה בכל שירותי המוזיקה.">
+<link rel="canonical" href="https://dudikalish.com/singles.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="דודי קאליש">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="סינגלים וקליפים | דודי קאליש">
+<meta property="og:description" content="הסינגלים והקליפים של דודי קאליש, עם קישורים להאזנה בכל שירותי המוזיקה.">
+<meta property="og:url" content="https://dudikalish.com/singles.html">
+<meta property="og:image" content="https://dudikalish.com/assets/img/share.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0C1716">
+<link rel="icon" href="favicon.ico" sizes="48x48"><link rel="icon" href="icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@200;300;400;500;600;700&family=Abril+Fatface&display=swap">
+<script src="assets/js/a11y.js?v=1120b"></script>
+<link rel="stylesheet" href="assets/css/style.css?v=1124x">
+<link rel="stylesheet" href="assets/css/motion.css?v=1117a">
+<script src="assets/js/motion.js?v=1109e"></script>
+<script defer src="assets/vendor/gsap.min.js?v=3125"></script><script defer src="assets/vendor/ScrollTrigger.min.js?v=3125"></script><script defer src="assets/vendor/lenis.min.js?v=1113"></script><script defer src="assets/js/flow.js?v=1123p"></script>
+<style>
+  .years{max-width:980px;margin:0 auto}
+  .yg{display:grid;grid-template-columns:150px 1fr;gap:0 32px;align-items:start;padding:22px 0;border-top:1px solid var(--line)}   /* year at the side, its singles beside it, next year below (user 12/11) */
+  .yg .yr{font-family:var(--f-num);color:var(--red);font-size:44px;font-weight:400;line-height:1;margin:6px 0 0;position:sticky;top:calc(var(--header-h) + 20px)}
+  .yg .singles li:last-child{border-bottom:0}
+  .singles{list-style:none;margin:0;padding:0}
+  .singles li{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+  .singles li.has-art{grid-template-columns:auto 1fr auto}
+  .singles .art{width:56px;height:56px;border-radius:var(--radius-sm);object-fit:cover;display:block;background:var(--bg-3)}
+  .singles .sl{display:flex;gap:4px;align-self:center}
+  .singles .sl a{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);color:var(--ink-soft)}
+  .singles .sl a:hover{border-color:var(--teal-light);color:var(--ink)}
+  .singles .sl svg{width:16px;height:16px}
+  .singles .sl a[aria-label="Zing"] svg,.singles .sl a[aria-label="24six"] svg{width:26px;height:26px}
+  .singles b{font-weight:500;color:var(--ink)}
+  .singles small{display:block;color:var(--ink-dim);font-size:13px}
+  @media (max-width:760px){.yg{display:block;padding:0;border-top:0;margin:0 0 28px}.yg .yr{position:static;font-size:30px;margin:0 0 6px;padding-bottom:10px;border-bottom:1px solid var(--line)}.yg .singles li:last-child{border-bottom:1px solid var(--line)}}
+  @media (max-width:560px){.yg .yr{font-size:26px}.singles li{gap:10px}.singles .art{width:48px;height:48px}.singles .sl{flex-wrap:wrap;justify-content:flex-end;max-width:76px}}
+
+  /* 23/11 (שדרוג "פי 10", אבן 6): ניגון מהרשימה בנגן הקבוע, "נגן את כולם", עטיפות וכפתורים גדולים יותר */
+  .sg-bar[hidden]{display:none}
+  .sg-bar{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin:-6px 0 clamp(26px,4vw,44px);color:var(--ink-soft);font-size:16px;font-weight:400}
+  .sg-bar .btn svg{width:18px;height:18px}
+  .singles li,.singles li.has-art{grid-template-columns:minmax(0,1fr) auto;padding:10px 10px;margin:0 -10px;border-radius:14px;transition:background .2s}
+  .singles li:hover{background:rgb(172 196 195 / .06)}
+  .sg-main{all:unset;box-sizing:border-box;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;min-width:0;cursor:default;border-radius:10px}
+  .sg-main[data-play]{cursor:pointer}
+  .sg-main:focus-visible{outline:3px solid var(--teal-light);outline-offset:4px}
+  .sg-art{position:relative;width:64px;height:64px;border-radius:var(--radius-sm);overflow:hidden;background:var(--bg-3);flex:none}
+  .sg-art img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+  .sg-art .pl{position:absolute;inset:0;display:grid;place-items:center;background:rgb(8 16 15 / .45);color:#fff;opacity:0;transition:opacity .2s}
+  .sg-art .pl svg{width:26px;height:26px;translate:1px 0}
+  .sg-main[data-play]:hover .sg-art .pl,.sg-main[data-play]:focus-visible .sg-art .pl,li[data-dkp-now] .sg-art .pl{opacity:1}
+  .sg-main[data-play]:hover .sg-art img{transform:scale(1.06)}
+  .sg-txt{min-width:0}
+  .sg-txt b{display:block;font-size:17px;font-weight:600;color:var(--ink);line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .singles .sl{gap:6px}
+  .singles .sl a{width:40px;height:40px;transition:border-color .2s,color .2s,background .2s}
+  .singles .sl a:hover{background:rgb(172 196 195 / .1)}
+  .singles .sl svg{width:18px;height:18px}
+  .singles .sl a[aria-label="Zing"] svg,.singles .sl a[aria-label="24six"] svg{width:28px;height:28px}
+  .singles li[data-dkp-now]{outline:none;background:rgb(168 48 32 / .16)}
+  @media (max-width:560px){
+    .sg-main{gap:12px}.sg-art{width:56px;height:56px}
+    .sg-txt b{font-size:16px;white-space:normal}
+    .singles .sl{max-width:86px;gap:6px}
+    .sg-art .pl{opacity:.9;background:linear-gradient(transparent 40%,rgb(8 16 15 / .6))}   /* phones: a small play mark always shows */
+    .sg-art .pl svg{width:20px;height:20px;align-self:end;justify-self:start;margin:0 0 4px 4px}
+  }
+  @media (prefers-reduced-motion:reduce){.sg-art img{transition:none}}
+</style>
+</head>
+<body>
+<main class="section page-top">
+  <div class="wrap">
+    <h1 class="brush title center" style="margin-bottom:28px">סינגלים וקליפים</h1>
+    <div class="sg-bar" id="sg-bar" hidden></div>
+    <div class="years" id="singles-list"></div>
+  </div>
+</main>
+<script src="assets/js/icons.js?v=1124a"></script>
+<script src="assets/js/email.js?v=1118a"></script>
+<script src="assets/js/app.js?v=1124x"></script>
+<script defer src="assets/js/player.js?v=1123v"></script>
+<script>
+document.addEventListener("chrome:ready", async () => {
+  const d = await loadJSON("albums");
+  const label = { "24six": "24six", "apple-music": "Apple Music", "spotify": "Spotify", "youtube": "YouTube", "zing": "Zing" };
+  /* text edited in the admin is always printed as text, never as markup (23/11) */
+  const esc = (v) => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  /* 23/11: a single with a YouTube link plays right here, in the site's fixed player (assets/js/player.js) */
+  const ytId = (u) => { const m = /(?:[?&]v=|youtu\.be\/|\/embed\/|\/shorts\/)([\w-]{11})/.exec(u || ""); return m ? m[1] : ""; };
+  const row = s => {
+    const yt = ytId(s.links && s.links.youtube);
+    const art = s.cover ? `<span class="sg-art"><img src="${esc(s.cover)}" alt="" loading="lazy" width="64" height="64">${yt ? `<span class="pl" aria-hidden="true">${UI.play}</span>` : ""}</span>` : `<span class="sg-art"></span>`;
+    const main = `<button type="button" class="sg-main" ${yt ? `data-play="${yt}" aria-label="האזנה: ${esc(s.title)}"` : 'tabindex="-1" disabled'}>${art}<span class="sg-txt"><b>${esc(s.title)}</b>${s.with ? `<small>עם ${esc(s.with)}</small>` : ""}</span></button>`;
+    const links = s.links ? `<span class="sl">${Object.entries(s.links).map(([k, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener" aria-label="${label[k] || esc(k)}" title="${label[k] || esc(k)}">${ICON(k) || label[k] || esc(k)}</a>`).join("")}</span>` : "";
+    return `<li class="has-art"${yt ? ` data-yt="${yt}" data-title="${esc(s.title)}" data-sub="${esc(["דודי קאליש", s.with].filter(Boolean).join(" · "))}"` : ""}>${main}${links}</li>`;
+  };
+  const years = [];   // one heading per year, newest first (list is already sorted by year)
+  d.singles.forEach(s => { const g = years[years.length - 1]; if (g && g.year === s.year) g.items.push(s); else years.push({ year: s.year, items: [s] }); });
+  $("#singles-list").innerHTML = years.map(g => `<section class="yg"><h2 class="yr">${esc(g.year)}</h2><ol class="singles">${g.items.map(row).join("")}</ol></section>`).join("");
+  /* "play them all": the newest first, one after the other */
+  const playable = d.singles.filter(s => ytId(s.links && s.links.youtube));
+  const bar = $("#sg-bar");
+  if (playable.length) {
+    bar.innerHTML = `<span>${d.singles.length} סינגלים</span><button type="button" class="btn btn-red" id="sg-all">${UI.play}<span>נגן את כולם</span></button>`;
+    bar.hidden = false;
+    $("#sg-all").onclick = () => playVideo(ytId(playable[0].links.youtube));
+  }
+  $("#singles-list").addEventListener("click", (e) => { const b = e.target.closest("[data-play]"); if (b) playVideo(b.dataset.play); });
+  revealAll();
+});
+</script>
+</body>
+</html>

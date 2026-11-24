@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>מוזיקה | דודי קאליש</title>
+<meta name="description" content="כל השירים, הקליפים והלייבים של דודי קאליש.">
+<link rel="canonical" href="https://dudikalish.com/music.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="דודי קאליש">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="מוזיקה | דודי קאליש">
+<meta property="og:description" content="כל השירים, הקליפים והלייבים של דודי קאליש.">
+<meta property="og:url" content="https://dudikalish.com/music.html">
+<meta property="og:image" content="https://dudikalish.com/assets/img/share.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0C1716">
+<link rel="icon" href="favicon.ico" sizes="48x48"><link rel="icon" href="icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@200;300;400;500;600;700&family=Abril+Fatface&display=swap">
+<script src="assets/js/a11y.js?v=1120b"></script>
+<link rel="stylesheet" href="assets/css/style.css?v=1124x">
+<link rel="stylesheet" href="assets/css/motion.css?v=1117a">
+<script src="assets/js/motion.js?v=1109e"></script>
+<script defer src="assets/vendor/gsap.min.js?v=3125"></script><script defer src="assets/vendor/ScrollTrigger.min.js?v=3125"></script><script defer src="assets/vendor/lenis.min.js?v=1113"></script><script defer src="assets/js/flow.js?v=1123p"></script>
+<style>
+  /* עמוד מוזיקה מחדש (23/11): סינון+חיפוש, השיר החדש בגדול, שורת נבחרים, הכל לפי שנים */
+  .music-page .mtools{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center;justify-content:center;margin-bottom:clamp(30px,4.5vw,52px)}
+  .music-page .filters{margin:0}
+  .msearch{position:relative;display:flex;align-items:center;width:min(300px,100%)}
+  .msearch svg{position:absolute;inset-inline-start:15px;width:18px;height:18px;color:var(--ink-dim);pointer-events:none}
+  .msearch input{width:100%;height:44px;padding:0 16px;padding-inline-start:44px;border-radius:999px;border:1px solid var(--line);background:rgb(12 23 22 / .55);
+    color:var(--ink);font:inherit;font-size:15px;font-weight:400;transition:border-color .2s,box-shadow .2s}
+  .msearch input::placeholder{color:var(--ink-dim)}
+  .msearch input:focus{outline:none;border-color:var(--teal-light);box-shadow:0 0 0 3px rgb(172 196 195 / .16)}
+  .msearch input::-webkit-search-cancel-button{filter:invert(.8)}
+  .mresult{text-align:center;color:var(--ink-soft);font-size:15px;margin:-14px 0 28px}
+
+  /* the newest song */
+  .mfeature{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(24px,4.5vw,64px);align-items:center;margin-bottom:clamp(56px,8vw,104px)}
+  .mf-media{position:relative;aspect-ratio:16/9;border-radius:22px;overflow:hidden;cursor:pointer;background:var(--bg-3);
+    box-shadow:0 34px 80px rgb(2 8 8 / .55),0 0 0 1px rgb(172 196 195 / .14)}
+  .mf-media img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+  .mf-media::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 120%,rgb(8 16 15 / .55),transparent 60%);pointer-events:none}
+  .mf-play{position:absolute;inset:0;margin:auto;z-index:1;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--red);color:#fff;
+    box-shadow:0 12px 36px rgb(168 48 32 / .5);transition:transform .35s cubic-bezier(.2,.8,.2,1),background .2s}
+  .mf-play svg{width:38px;height:38px;translate:2px 0}   /* a play triangle looks centred a touch right of the true middle */
+  .music-page [hidden]{display:none!important}
+  .mf-media:hover img{transform:scale(1.04)}
+  .mf-media:hover .mf-play{transform:scale(1.08);background:var(--red-deep)}
+  .mf-media:focus-visible{outline:3px solid var(--teal-light);outline-offset:4px}
+  .mf-eyebrow{font-size:14px;letter-spacing:.28em;color:var(--teal-light);font-weight:500}
+  .mf-title{font-family:var(--f-brush);font-weight:700;font-size:clamp(48px,6vw,92px);line-height:.95;color:var(--ink);margin:.18em 0 .22em;text-wrap:balance}
+  .mf-with{font-size:clamp(16px,1.3vw,18px);color:var(--ink-soft);font-weight:400;margin:0;max-width:34ch}
+  .mf-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .mf-actions .btn svg{width:20px;height:20px}
+
+  /* picks: a row that scrolls sideways */
+  .mrow{margin-bottom:clamp(56px,8vw,104px)}
+  .mrow-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
+  .mh{font-family:var(--f-brush);font-weight:700;color:var(--red);font-size:clamp(36px,4.2vw,54px);line-height:1;margin:0}
+  .mrow-nav{display:flex;gap:8px}
+  .mrow-nav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink-soft);transition:border-color .2s,color .2s,opacity .2s}
+  .mrow-nav button:hover{border-color:var(--teal-light);color:var(--ink)}
+  .mrow-nav button:disabled{opacity:.3;pointer-events:none}
+  .mrow-nav svg{width:20px;height:20px}
+  .mrow-track{display:grid;grid-auto-flow:column;grid-auto-columns:min(310px,76vw);gap:18px;overflow-x:auto;overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;padding:4px 2px 14px;scrollbar-width:thin;scrollbar-color:rgb(172 196 195 / .3) transparent}
+  .mrow-track>*{scroll-snap-align:start}
+  .mrow-track .vcard.reveal{opacity:1;transform:none}
+
+  /* all songs by year */
+  .myear{margin-bottom:clamp(44px,6vw,76px)}
+  .myear-head{display:flex;align-items:baseline;gap:16px;padding-bottom:12px;margin-bottom:22px;border-bottom:1px solid var(--line)}
+  .myear-head .yr{font-family:var(--f-num);font-weight:400;color:var(--red);font-size:clamp(36px,4.2vw,56px);line-height:1;margin:0}
+  .myear-head .n{color:var(--ink-dim);font-size:15px;font-weight:400}
+
+  /* the cards: the song's name under the picture; no live blur behind each of the 76 cards (heavy while scrolling) */
+  .music-page .vcard{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgb(28 54 52 / .42)}
+  .music-page .vcard .vt{margin:12px 4px 0;font-size:17px;font-weight:600;line-height:1.35;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .music-page .vcard .meta{padding-top:4px}
+  .music-page .vcard:focus-visible{outline:3px solid var(--teal-light);outline-offset:3px}
+
+  @media (max-width:860px){
+    .mfeature{grid-template-columns:1fr;gap:22px}
+    .mf-text{text-align:center}
+    .mf-with{margin-inline:auto}
+    .mf-actions{justify-content:center}
+  }
+  @media (max-width:600px){
+    .mrow-nav{display:none}
+    .mrow-track{margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);scroll-padding-inline:var(--gutter)}
+    .mf-play{width:68px;height:68px}.mf-play svg{width:30px;height:30px}
+    .music-page .vcard .vt{font-size:15px;margin-top:10px}
+  }
+  @media (prefers-reduced-motion:reduce){.mf-media img,.mf-play{transition:none}}
+</style>
+</head>
+<body>
+<main class="section page-top music-page">
+  <div class="wrap">
+    <h1 class="brush title center" style="margin-bottom:28px">המוזיקה שלי</h1>
+    <div class="mtools">
+      <div class="filters" id="filters" role="group" aria-label="סינון"></div>
+      <label class="msearch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="music-q" placeholder="חיפוש שיר או אמן" aria-label="חיפוש שיר או אמן" autocomplete="off" enterkeyhint="search">
+      </label>
+    </div>
+    <p class="mresult" id="music-result" role="status" hidden></p>
+    <section class="mfeature reveal" id="music-feature" aria-label="השיר החדש"></section>
+    <section class="mrow reveal" id="music-picks" aria-labelledby="picks-title" hidden>
+      <div class="mrow-head">
+        <h2 class="mh" id="picks-title">נבחרים</h2>
+        <div class="mrow-nav">
+          <button type="button" id="picks-prev" aria-label="הקודמים"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button type="button" id="picks-next" aria-label="הבאים"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+        </div>
+      </div>
+      <div class="mrow-track" id="picks-track"></div>
+    </section>
+    <div id="music-years"></div>
+    <p class="empty-state" id="music-empty" hidden>אין עדיין סרטונים בקטגוריה הזו.</p>
+  </div>
+</main>
+<script src="assets/js/icons.js?v=1124a"></script>
+<script src="assets/js/email.js?v=1118a"></script>
+<script src="assets/js/app.js?v=1124x"></script>
+<script defer src="assets/js/player.js?v=1123v"></script>
+<script src="assets/js/music.js?v=1123m"></script>
+</body>
+</html>
